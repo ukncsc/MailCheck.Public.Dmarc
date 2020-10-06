@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject>MailCheck.Dmarc.Evaluator.LocalEntryPoint</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.1.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.5.0" />
+    <PackageReference Include="Flurl.Http" Version="2.4.1" />
+    <PackageReference Include="MailCheck.Common.Messaging" Version="2.6.0.58" />
+    <PackageReference Include="MailCheck.Common.Api" Version="2.6.0.58" />
+    <PackageReference Include="MailCheck.Common.Util" Version="2.6.0.58" />
+    <PackageReference Include="MailCheck.Common.SSM" Version="2.6.0.58" />
+    <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MailCheck.Aggregate.Client\MailCheck.AggregateReport.Client.csproj" />
+    <ProjectReference Include="..\MailCheck.Dkim.Client\MailCheck.Dkim.Client.csproj" />
+    <ProjectReference Include="..\MailCheck.Dmarc.Contracts\MailCheck.Dmarc.Contracts.csproj" />
+    <ProjectReference Include="..\MailCheck.Spf.Client\MailCheck.Spf.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Rules\DmarcRulesMarkDownResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DmarcRulesMarkDownResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Rules\DmarcRulesResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DmarcRulesResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Rules\DmarcRulesMarkDownResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DmarcRulesMarkDownResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Rules\DmarcRulesResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DmarcRulesResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,1 @@
+﻿GRANT SELECT ON `dmarc_entity` TO '{env}_reports' IDENTIFIED BY '{password}';

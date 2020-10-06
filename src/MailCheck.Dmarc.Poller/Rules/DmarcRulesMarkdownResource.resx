@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NoDmarcErrorMessage" xml:space="preserve">
+    <value>### Publish a DMARC record to enable DMARC reporting
+
+_This won't affect your email deliverability and will enable reporting to Mail Check_
+
+This tells anyone receiving email from you that:
+
+- you have a DMARC policy `(v=DMARC1)` 
+- any messages that fail DMARC checks should still be delivered `(p=none)` 
+- any messages that fail DMARC checks should still be delivered for any subdomains `(sp=none)` 
+- they should send reports of email received to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)` 
+
+**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain {0} to a Workspace and click Verify.
+
+**Step 2: Create a DMARC record.** Publish this text (TXT) record to the DNS zone for {0}, ensuring you replace **INSERT_TOKEN_HERE** with the token you obtain from the previous steps:
+
+`_dmarc.{0} TXT v=DMARC1;p=none;rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`</value>
+  </data>
+  <data name="OnlyOneDmarcRecordErrorMessage" xml:space="preserve">
+    <value>It looks like there are multiple DMARC records for this domain, this isn't valid as there can only be one.
+This is often because a new record has been created to progress policy to quarantine or reject
+but the old record has been left in place. Please delete the extra record to clear this message</value>
+  </data>
+  <data name="PolicyTagMustExistErrorMessage" xml:space="preserve">
+    <value>DMARC exists to publish a policy, you need to add one of the following to your DMARC record:
+
+- `p=none` Report only, don't drop any emails.
+- `p=quarantine` Request that email providers move this email to the spam folder, and report back.
+- `p=reject` Request that email providers silently drop this email and report back.</value>
+  </data>
+  <data name="RuaTagShouldNotHaveMoreThanTwoUrisErrorMessage" xml:space="preserve">
+    <value>This DMARC record has requested mail servers to send aggregate reports to {0} destinations.
+
+Please be aware that email servers are only obliged to deliver to the first two.
+Any extra destinations may get a random selection of reports giving misleading statistics.
+
+[From the DMARC RFC:](https://tools.ietf.org/html/rfc7489#section-6.2)
+
+`A report is normally sent to each listed URI in the order provided by the Domain Owner. Receivers MAY impose a limit on the number of URIs to which they will send reports but MUST support the ability to send to at least two.`</value>
+  </data>
+  <data name="RuaTagsShouldBeMailToErrorMessage" xml:space="preserve">
+    <value>This DMARC record is using an unsupported method of delivering aggregate reports than mailto.
+
+It's most likely that mailto has a spelling mistake, please investigate.</value>
+  </data>
+  <data name="RufTagShouldBeMailToErrorMessage" xml:space="preserve">
+    <value>This DMARC record is using a different method of delivering forensic reports than email (mailto:)
+The email method is the only one that is well supported so we don't recommend using others.
+
+It's most likely that this DMARC record has a spelling mistake mailto or is otherwise misconfigured, please investigate.</value>
+  </data>
+  <data name="RufTagShouldNotHaveMoreThanTwoUrisErrorMessage" xml:space="preserve">
+    <value>This DMARC record has requested mail servers to send forensic reports to {0} destinations.
+
+Please be aware that email servers are only obliged to deliver to the first two.
+Any extra destinations may get a random selection of reports or none at all.
+
+[From the DMARC RFC:](https://tools.ietf.org/html/rfc7489#section-6.2)
+
+`A report is normally sent to each listed URI in the order provided by the Domain Owner. Receivers MAY impose a limit on the number of URIs to which they will send reports but MUST support the ability to send to at least two.`</value>
+  </data>
+  <data name="SubDomainIneffectualErrorMessage" xml:space="preserve">
+    <value>A DMARC policy will only cascade down to subdomains if the record is on an organisation domain.
+
+An organisation domain is one level below a suffix that is listed on the [public suffix list](https://publicsuffix.org/)
+
+If a subdomain policy is defined on any domain below an organisational domain then it will have no effect.
+
+You may wish to create a DMARC record on any subdomains to override the organisational domain's subdomain policy
+
+[Read more about organizational domains in the DMARC RFC](https://tools.ietf.org/html/rfc7489#section-3.2)</value>
+  </data>
+  <data name="TldDmarcWeaklyDefinedMessage" xml:space="preserve">
+    <value>DMARC policies aren't aren't intended to be published for top level domains that appear on the [public suffix list](https://publicsuffix.org/)
+
+The standard does not define the behaviour, so you are likely to see mixed results.</value>
+  </data>
+  <data name="VersionMustBeFirstTagErrorMessage" xml:space="preserve">
+    <value>A DMARC record must always start with v=DMARC1 to be valid.
+This record starts with {0} which is a misconfiguration.</value>
+  </data>
+</root>

@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject>MailCheck.Dmarc.Poller.LocalEntryPoint</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Evaluator\**" />
+    <EmbeddedResource Remove="Evaluator\**" />
+    <None Remove="Evaluator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Parsing\DmarcVersionParser.cs" />
+    <Compile Remove="Parsing\IMechanismParserStrategy.cs" />
+    <Compile Remove="Parsing\IModifierParserStrategy.cs" />
+    <Compile Remove="Parsing\MechanismParser.cs" />
+    <Compile Remove="Parsing\ModifierParser.cs" />
+    <Compile Remove="Parsing\QualifierParser.cs" />
+    <Compile Remove="Parsing\TermParser.cs" />
+    <Compile Remove="Rules\Record\PctValueShouldBe100.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.1.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.5.0" />
+    <PackageReference Include="DnsClient" Version="1.2.0" />
+    <PackageReference Include="MailCheck.Common.Messaging" Version="2.6.0.58" />
+    <PackageReference Include="MailCheck.Common.util" Version="2.6.0.58" />
+    <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Louw.PublicSuffix" Version="1.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MailCheck.Dmarc.Contracts\MailCheck.Dmarc.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Parsing\DmarcParserMarkdownResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DmarcParserMarkdownResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parsing\DmarcParserResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DmarcParserResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Rules\DmarcRulesMarkdownResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DmarcRulesMarkdownResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Rules\DmarcRulesResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DmarcRulesResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Rules\Record\TagShouldNotHaveMoreThanTwoUris.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+</Project>

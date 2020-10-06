@@ -1,0 +1,1 @@
+﻿This class is a client to access the API exposed by the SPF microservice. Once the SPF microservice pipeline has been updated to build nuget packages this should be moved the the SPF solution and distributed/consumed as nuget package along with SPF contracts.

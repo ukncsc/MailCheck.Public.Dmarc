@@ -1,0 +1,1 @@
+﻿This class is a client to access the API exposed by the Aggregate report microservice. Once the Aggregate report microservice pipeline has been updated to build nuget packages this should be moved the the Aggregate report solution and distributed/consumed as nuget package along with Aggregate Report contracts.

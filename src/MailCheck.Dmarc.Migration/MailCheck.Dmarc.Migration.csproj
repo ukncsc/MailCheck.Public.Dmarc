@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\2019-01-22-1223_create_dmarc_scheduled_records_table.sql" />
+    <None Remove="Scripts\2019-01-22-1224_create_dmarc_scheduled_records_grants.sql" />
+    <None Remove="Scripts\2019-02-06-1452_create_dmarc_entity_table.sql" />
+    <None Remove="Scripts\2019-02-06-1453_create_dmarc_entity_grants.sql" />
+    <None Remove="Scripts\2019-02-06-1454_create_dmarc_entity_history_table.sql" />
+    <None Remove="Scripts\2019-02-06-1455_create_dmarc_entity_history_grants.sql" />
+    <None Remove="Scripts\2019-02-27-1137_create_dmarc_entity_grants.sql" />
+    <None Remove="Scripts\2019-02-27-1643_lower_casing_domains.sql" />
+    <None Remove="Scripts\2019-05-08-0923_create_dmarc_entity_report_grants.sql" />
+    <None Remove="Scripts\2019-07-15-1130_add_delete_grants_for_ent_and_sch.sql" />
+    <None Remove="Scripts\2020-04-03-1453_dev_report_grants.sql.sql" />
+    <None Remove="Scripts\2020-04-06-1453_dev_report_s3_grants.sql" />
+    <None Remove="Scripts\everytime\grants.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\2019-02-27-1643_lower_casing_domains.sql" />
+    <EmbeddedResource Include="Scripts\2019-02-27-1137_create_dmarc_entity_grants.sql" />
+    <EmbeddedResource Include="Scripts\2019-02-06-1455_create_dmarc_entity_history_grants.sql" />
+    <EmbeddedResource Include="Scripts\2019-02-06-1454_create_dmarc_entity_history_table.sql" />
+    <EmbeddedResource Include="Scripts\2019-02-06-1452_create_dmarc_entity_table.sql" />
+    <EmbeddedResource Include="Scripts\2019-02-06-1453_create_dmarc_entity_grants.sql" />
+    <EmbeddedResource Include="Scripts\2019-01-22-1223_create_dmarc_scheduled_records_table.sql" />
+    <EmbeddedResource Include="Scripts\2019-01-22-1224_create_dmarc_scheduled_records_grants.sql" />
+    <EmbeddedResource Include="Scripts\2019-05-08-0923_create_dmarc_entity_report_grants.sql" />
+    <EmbeddedResource Include="Scripts\2019-07-15-1130_add_delete_grants_for_ent_and_sch.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\2020-04-03-1453_dev_report_grants.sql.sql" />
+    <EmbeddedResource Include="Scripts\2020-04-06-1453_dev_report_s3_grants.sql" />
+    <EmbeddedResource Include="Scripts\everytime\grants.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailCheck.Common.Data.Migration" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

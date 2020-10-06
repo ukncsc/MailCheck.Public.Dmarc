@@ -1,0 +1,1 @@
+﻿GRANT SELECT, INSERT, UPDATE ON `dmarc_scheduled_records` TO '{env}-dmarc-sch' IDENTIFIED BY '{password}';
