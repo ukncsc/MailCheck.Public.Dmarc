@@ -15,6 +15,7 @@ namespace MailCheck.Dmarc.Evaluator.Explainers
                 if (sb.Length > 0)
                 {
                     sb.Append(Environment.NewLine);
+                    sb.Append(Environment.NewLine);
                 }
 
                 switch (failureOptionType)

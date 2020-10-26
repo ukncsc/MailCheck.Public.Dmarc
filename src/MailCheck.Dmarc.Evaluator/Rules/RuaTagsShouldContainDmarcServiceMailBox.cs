@@ -38,8 +38,9 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
         public Message GetMessage(DmarcRecord record)
         {
-            List<ReportUriAggregate> reportUriAggregates = record.Tags.OfType<ReportUriAggregate>().ToList();
+            string recordText = !record.Record.EndsWith(";") ? $"{record.Record};" : record.Record;
 
+            List<ReportUriAggregate> reportUriAggregates = record.Tags.OfType<ReportUriAggregate>().ToList();
             // If we have duplicate entries for the same tag
             // There is already an error so disable this rule
             if (reportUriAggregates.Count > 1)
@@ -60,7 +61,7 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
                 Regex ruaRegex = new Regex("rua=[^;]+;");
 
-                string currentRuaTag = ruaRegex.Match(record.Record).Value;
+                string currentRuaTag = ruaRegex.Match(recordText).Value;
                 string suggestedRuaTag = currentRuaTag.Replace(" ", "");
 
                 foreach (Uri uri in mailCheckUris)
@@ -73,9 +74,9 @@ namespace MailCheck.Dmarc.Evaluator.Rules
                 suggestedRuaTag = suggestedRuaTag.Replace("=,", "=");
 
                 string delimiter = reportUris.Count > mailCheckUris.Count ? "," : "";
-                suggestedRuaTag = suggestedRuaTag.Replace("rua=", $"rua=mailto:{_dmarcVerificationMailboxAddress}{delimiter}");
+                suggestedRuaTag = suggestedRuaTag.Replace("rua=", $"rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk{delimiter}");
 
-                string suggestedRecord = record.Record;
+                string suggestedRecord = recordText;
                 if (!string.IsNullOrEmpty(suggestedRecord) && !string.IsNullOrEmpty(currentRuaTag) && !string.IsNullOrEmpty(suggestedRuaTag))
                 {
                     suggestedRecord = suggestedRecord.Replace(currentRuaTag, suggestedRuaTag);
@@ -92,7 +93,7 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
             if (!mailCheckUris.Any() && otherAllowedRuaCount == 0)
             {
-                string dmarcRecord = record.Record;
+                string dmarcRecord = recordText;
 
                 dmarcRecord = NeatenRecord(dmarcRecord);
 
