@@ -62,6 +62,7 @@ namespace MailCheck.Dmarc.Evaluator.StartUp
                 .AddTransient<IRule<DmarcRecord>, RuaTagsShouldContainDmarcServiceMailBox>()
                 .AddTransient<IRule<DmarcRecord>, RufTagShouldNotContainDmarcServiceMailBox>()
                 .AddTransient<IRule<DmarcRecord>, ShouldHaveSpfRecordWIthPolicyOfQuarantineOrReject>()
+                .AddTransient<IRule<DmarcRecord>, SubDomainPolicyShouldBeQuarantineOrReject>()
                 .AddTransient<IAmazonSimpleNotificationService, AmazonSimpleNotificationServiceClient>()
                 .AddTransient<IDmarcEvaluatorConfig, DmarcEvaluatorConfig>()
                 .AddSingleton<IAmazonSimpleSystemsManagement, CachingAmazonSimpleSystemsManagementClient>()

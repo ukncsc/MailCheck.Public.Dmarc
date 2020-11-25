@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MailCheck.Dmarc.Contracts.Entity;
@@ -83,7 +84,7 @@ namespace MailCheck.Dmarc.Poller.Test.Integration.TagParser
             Assert.AreEqual(MessageType.error, advisories[0].MessageType);
 
             Assert.AreEqual("Only URIs with mailto: scheme are guaranteed to have aggregate reports delivered. This record has non mailto: scheme URIs in its aggregate report URI tag (rua).", advisories[1].Text);
-            Assert.AreEqual("This DMARC record is using an unsupported method of delivering aggregate reports than mailto.\n\nIt's most likely that mailto has a spelling mistake, please investigate.", advisories[1].MarkDown);
+            Assert.AreEqual($"This DMARC record is using an unsupported method of delivering aggregate reports than mailto.{Environment.NewLine}{Environment.NewLine}It's most likely that mailto has a spelling mistake, please investigate.", advisories[1].MarkDown);
             Assert.AreEqual(MessageType.warning, advisories[1].MessageType);
 
             Assert.AreEqual($"rua={invalidValue};", ruaTag.Value);
@@ -112,7 +113,7 @@ namespace MailCheck.Dmarc.Poller.Test.Integration.TagParser
             Assert.AreEqual(MessageType.error, advisories[1].MessageType);
 
             Assert.AreEqual("Only URIs with mailto: scheme are guaranteed to have aggregate reports delivered. This record has non mailto: scheme URIs in its aggregate report URI tag (rua).", advisories[2].Text);
-            Assert.AreEqual("This DMARC record is using an unsupported method of delivering aggregate reports than mailto.\n\nIt's most likely that mailto has a spelling mistake, please investigate.", advisories[2].MarkDown);
+            Assert.AreEqual($"This DMARC record is using an unsupported method of delivering aggregate reports than mailto.{Environment.NewLine}{Environment.NewLine}It's most likely that mailto has a spelling mistake, please investigate.", advisories[2].MarkDown);
             Assert.AreEqual(MessageType.warning, advisories[2].MessageType);
 
             Assert.AreEqual($"rua={rua};", ruaTag.Value);

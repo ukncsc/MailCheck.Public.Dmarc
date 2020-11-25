@@ -45,9 +45,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -65,9 +65,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -85,9 +85,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
 
@@ -103,9 +103,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
 
             string actualMarkdown =  (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -124,9 +124,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -145,9 +145,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -165,9 +165,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
             
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -185,9 +185,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -207,9 +207,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -229,9 +229,9 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string actualMarkdown = (await _rule.Evaluate(testDmarcRecord)).First().MarkDown;
 
             string expectedMarkdown = "Your DMARC record contains the wrong email address for Mail Check aggregate report processing."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:\n\n`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
             Assert.AreEqual(expectedMarkdown, actualMarkdown);
         }
@@ -292,10 +292,10 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string record = "v=DMARC1;p=reject;adkim=s;aspf=s;fo=1;rua=mailto:rua@service.gov.uk;ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;";
 
             string markDown = "The DMARC record does not contain the NCSC Mail Check email address, it's fine to use other tools but be aware that we won't be able to help you investigate email abuse, and you won't see any reporting in Mail Check."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
-                + $"\n\n`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
+                + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
             await Test(testDmarcRecord, true, MessageType.warning, markDown);
@@ -307,10 +307,10 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             string record = "v=DMARC1;p=reject;adkim=s;aspf=s;fo=1;ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;";
 
             string markDown = "The DMARC record does not contain the NCSC Mail Check email address, it's fine to use other tools but be aware that we won't be able to help you investigate email abuse, and you won't see any reporting in Mail Check."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
-                + $"\n\n`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
+                + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
             await Test(testDmarcRecord, true, MessageType.warning, markDown);
@@ -324,10 +324,10 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
         public async Task UntidyRecordWithNoRuaSuggestsNeatRecordWithAppendedRua(string record)
         {
             string markDown = "The DMARC record does not contain the NCSC Mail Check email address, it's fine to use other tools but be aware that we won't be able to help you investigate email abuse, and you won't see any reporting in Mail Check."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
-                + $"\n\n`v=DMARC1; p=quarantine; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
+                + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=quarantine; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
             await Test(testDmarcRecord, true, MessageType.warning, markDown);
@@ -339,10 +339,10 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
         public async Task UntidyRecordWithNonMailCheckRuaSuggestsNeatRecordWithMailCheckRua(string record)
         {
             string markDown = "The DMARC record does not contain the NCSC Mail Check email address, it's fine to use other tools but be aware that we won't be able to help you investigate email abuse, and you won't see any reporting in Mail Check."
-                + $"\n\nReports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
-                + $"\n\n**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
-                + $"\n\n**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
-                + $"\n\n`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;`";
+                + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain test.gov.uk to a Workspace and click Verify."
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:"
+                + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
             await Test(testDmarcRecord, true, MessageType.warning, markDown);

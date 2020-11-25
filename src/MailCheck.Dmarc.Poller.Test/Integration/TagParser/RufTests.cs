@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MailCheck.Dmarc.Contracts.Entity;
@@ -83,7 +84,7 @@ namespace MailCheck.Dmarc.Poller.Test.Integration.TagParser
             Assert.AreEqual(MessageType.error, advisories[0].MessageType);
 
             Assert.AreEqual("Only URIs with mailto: scheme are guaranteed to have forensic reports delivered. This record has non mailto: scheme URIs in its forensic report URI tag (ruf).", advisories[1].Text);
-            Assert.AreEqual("This DMARC record is using a different method of delivering forensic reports than email (mailto:)\nThe email method is the only one that is well supported so we don't recommend using others.\n\nIt's most likely that this DMARC record has a spelling mistake mailto or is otherwise misconfigured, please investigate.", advisories[1].MarkDown);
+            Assert.AreEqual($"This DMARC record is using a different method of delivering forensic reports than email (mailto:){Environment.NewLine}The email method is the only one that is well supported so we don't recommend using others.{Environment.NewLine}{Environment.NewLine}It's most likely that this DMARC record has a spelling mistake mailto or is otherwise misconfigured, please investigate.", advisories[1].MarkDown);
             Assert.AreEqual(MessageType.warning, advisories[1].MessageType);
 
             Assert.AreEqual($"ruf={invalidValue};", rufTag.Value);
@@ -113,7 +114,7 @@ namespace MailCheck.Dmarc.Poller.Test.Integration.TagParser
             Assert.AreEqual(MessageType.error, advisories[1].MessageType);
 
             Assert.AreEqual("Only URIs with mailto: scheme are guaranteed to have forensic reports delivered. This record has non mailto: scheme URIs in its forensic report URI tag (ruf).", advisories[2].Text);
-            Assert.AreEqual("This DMARC record is using a different method of delivering forensic reports than email (mailto:)\nThe email method is the only one that is well supported so we don't recommend using others.\n\nIt's most likely that this DMARC record has a spelling mistake mailto or is otherwise misconfigured, please investigate.", advisories[2].MarkDown);
+            Assert.AreEqual($"This DMARC record is using a different method of delivering forensic reports than email (mailto:){Environment.NewLine}The email method is the only one that is well supported so we don't recommend using others.{Environment.NewLine}{Environment.NewLine}It's most likely that this DMARC record has a spelling mistake mailto or is otherwise misconfigured, please investigate.", advisories[2].MarkDown);
             Assert.AreEqual(MessageType.warning, advisories[2].MessageType);
 
             Assert.AreEqual($"ruf={ruf};", rufTag.Value);

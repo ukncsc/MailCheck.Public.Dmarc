@@ -157,6 +157,6 @@
     <value>This domain is covered by a policy or subdomain policy of quarantine or reject, but it has no SPF record. This may cause emails to be dropped unless they are signed using DKIM. If this is intended you should consider putting in a reject all SPF record</value>
   </data>
   <data name="SubdomainPolicyMustBeQuarantineOrRejectErrorMessage" xml:space="preserve">
-    <value>Only a sub domain policy (sp) of Quarantine or Reject will protect recipients from spoofed email. Consider changing sub domain policy from {0} to Quarantine or Reject.</value>
+    <value>Only a subdomain policy (sp) of Quarantine or Reject will protect recipients from spoofed email. Consider changing subdomain policy from {0} to Quarantine or Reject.</value>
   </data>
 </root>

@@ -17,6 +17,7 @@ namespace MailCheck.Dmarc.Poller.Dns
 
     public class DnsClient : IDnsClient
     {
+        private const string SERV_FAILURE_ERROR = "Server Failure";
         private const string NON_EXISTENT_DOMAIN_ERROR = "Non-Existent Domain";
         private readonly ILookupClient _lookupClient;
         private readonly IOrganisationalDomainProvider _organisationalDomainProvider;
@@ -51,7 +52,7 @@ namespace MailCheck.Dmarc.Poller.Dns
                 }
             }
 
-            if (response.HasError && response.ErrorMessage != NON_EXISTENT_DOMAIN_ERROR)
+            if (response.HasError && response.ErrorMessage != NON_EXISTENT_DOMAIN_ERROR && response.ErrorMessage != SERV_FAILURE_ERROR)
             {
                 return new DnsResult<List<DmarcRecordInfo>>(response.ErrorMessage);
             }

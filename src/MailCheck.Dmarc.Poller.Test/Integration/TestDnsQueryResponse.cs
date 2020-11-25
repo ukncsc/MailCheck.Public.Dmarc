@@ -25,5 +25,6 @@ namespace MailCheck.Dmarc.Poller.Test.Integration
         public DnsResponseHeader Header { get; }
         public int MessageSize { get; }
         public NameServer NameServer { get; }
+        public DnsQuerySettings Settings => throw new System.NotImplementedException();
     }
 }

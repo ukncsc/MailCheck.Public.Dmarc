@@ -75,7 +75,7 @@ namespace MailCheck.Dmarc.Poller.Test.Integration.TagParser
 
             DmarcPollerException exception = Assert.ThrowsAsync<DmarcPollerException>(() => Handler.Handle(new DmarcPollPending("test.gov.uk")));
 
-            Assert.AreEqual("Unable to retrieve dmarc records for test.gov.uk.", exception.Message);
+            Assert.AreEqual("DMARC records missing or empty for test.gov.uk.", exception.Message);
         }
 
         [Test]

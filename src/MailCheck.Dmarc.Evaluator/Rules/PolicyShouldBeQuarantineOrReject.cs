@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MailCheck.Dmarc.Contracts;
 using MailCheck.Dmarc.Contracts.SharedDomain;
+using MailCheck.Dmarc.Evaluator.Util;
 using DmarcRecord = MailCheck.Dmarc.Contracts.SharedDomain.DmarcRecord;
 
 namespace MailCheck.Dmarc.Evaluator.Rules
@@ -15,14 +16,23 @@ namespace MailCheck.Dmarc.Evaluator.Rules
         public Task<List<Message>> Evaluate(DmarcRecord record)
         {
             Policy policy = record.Tags.OfType<Policy>().FirstOrDefault();
+            SubDomainPolicy subPolicy = record.Tags.OfType<SubDomainPolicy>().FirstOrDefault();
             List<Message> messages = new List<Message>();
 
             //Dont error on unknown because there will already be a parser error for this
-            if (policy != null && policy.PolicyType == PolicyType.None)
+            if (record.IsInherited && subPolicy != null && subPolicy.PolicyType == PolicyType.None)
+            {
+                string errorMessage = string.Format(DmarcRulesResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage, policy.PolicyType);
+                string markdown = DmarcRulesMarkDownResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage;
+                
+                messages.Add(new Message(Id, MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markdown));
+
+            } else if (policy != null && policy.PolicyType == PolicyType.None)
             {
                 string errorMessage = string.Format(DmarcRulesResource.PolicyShouldBeQuarantineOrRejectErrorMessage, policy.PolicyType);
                 string markdown = DmarcRulesMarkDownResource.PolicyShouldBeQuarantineOrRejectErrorMessage;
-                messages.Add(new Message(Id, MessageSources.DmarcEvaluator, Contracts.SharedDomain.MessageType.warning, errorMessage, markdown));
+
+                messages.Add(new Message(Id, MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markdown));
             }
 
             return Task.FromResult(messages);

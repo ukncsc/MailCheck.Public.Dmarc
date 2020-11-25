@@ -11,19 +11,14 @@ namespace MailCheck.Dmarc.Evaluator.Rules
     {
         public Guid Id => Guid.Parse("75E84628-BA93-4193-9675-B3E5F395D6FD");
 
-        public bool IsValid(SubDomainPolicy subDomainPolicy, bool isOrgDomain)
-        {
-            // Don't error on unknown because there will already be a parser error for this
-            return !isOrgDomain || subDomainPolicy == null || subDomainPolicy.PolicyType != PolicyType.None;
-        }
-
         public Task<List<Message>> Evaluate(DmarcRecord record)
         {
             SubDomainPolicy subDomainPolicy = record.Tags.OfType<SubDomainPolicy>().FirstOrDefault();
+            Policy policy = record.Tags.OfType<Policy>().FirstOrDefault();
 
             List<Message> messages = new List<Message>();
 
-            if (!IsValid(subDomainPolicy, record.IsOrgDomain))
+            if (!record.IsInherited && subDomainPolicy != null && policy.PolicyType != PolicyType.None && subDomainPolicy.PolicyType == PolicyType.None)
             {
                 string errorMessage = string.Format(DmarcRulesResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage, subDomainPolicy?.PolicyType);
                 string markDown = DmarcRulesMarkDownResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage;
