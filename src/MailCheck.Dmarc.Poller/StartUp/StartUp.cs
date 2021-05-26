@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using Amazon.SimpleNotificationService;
 using DnsClient;
 using MailCheck.Common.Messaging.Abstractions;
+using MailCheck.Common.Environment.FeatureManagement;
 using MailCheck.Dmarc.Contracts.Entity;
 using MailCheck.Dmarc.Contracts.SharedDomain.Serialization;
 using MailCheck.Dmarc.Poller.Config;
@@ -17,6 +18,7 @@ using MailCheck.Dmarc.Poller.Rules;
 using MailCheck.Dmarc.Poller.Rules.Record;
 using MailCheck.Dmarc.Poller.Rules.Records;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -44,13 +46,13 @@ namespace MailCheck.Dmarc.Poller.StartUp
             services
                 .AddTransient<DmarcProcessor>()
                 .AddSingleton(CreateLookupClient)
+                .AddTransient<IDmarcProcessor, DmarcProcessor>()
                 .AddTransient<IAmazonSimpleNotificationService, AmazonSimpleNotificationServiceClient>()
                 .AddTransient<IDnsClient, Dns.DnsClient>()
                 .AddTransient<IDmarcPollerConfig, DmarcPollerConfig>()
                 .AddTransient<IDnsNameServerProvider, LinuxDnsNameServerProvider>()
                 .AddTransient<IHandle<DmarcPollPending>, PollHandler>()
-                .AddTransient< IOrganisationalDomainProvider, OrganisationDomainProvider>()
-                .AddTransient<IDmarcProcessor, DmarcProcessor>()
+                .AddTransient<IOrganisationalDomainProvider, OrganisationDomainProvider>()
                 .AddTransient<ITagParser, TagParser>()
                 .AddTransient<IImplicitProvider<Tag>, ImplicitProvider<Tag>>()
                 .AddTransient<IImplicitProviderStrategy<Tag>, ReportIntervalImplicitProvider>()
@@ -76,7 +78,6 @@ namespace MailCheck.Dmarc.Poller.StartUp
                 .AddTransient<IUriTagParser, UriTagParser>()
                 .AddTransient<IMaxReportSizeParser, MaxReportSizeParser>()
                 .AddTransient<IEvaluator<DmarcRecords>, Evaluator<DmarcRecords>>()
-                .AddTransient<IRule<DmarcRecords>, OnlyOneDmarcRecord>()
                 .AddTransient<IRule<DmarcRecords>, TldDmarcRecordBehaviourIsWeaklyDefined>()
                 .AddTransient<IEvaluator<DmarcRecord>, Evaluator<DmarcRecord>>()
                 .AddTransient<IRule<DmarcRecord>, MaxLengthOf450Characters>()
@@ -85,7 +86,17 @@ namespace MailCheck.Dmarc.Poller.StartUp
                 .AddTransient<IRule<DmarcRecord>, RufTagShouldBeMailTo>()
                 .AddTransient<IRule<DmarcRecord>, VersionMustBeFirstTag>()
                 .AddTransient<IRule<DmarcRecord>, SubDomainPolicyShouldNotBeOnNonOrganisationalDomain>()
-               .AddTransient<IDmarcUriParser, DmarcUriParser>();
+                .AddTransient<IDmarcUriParser, DmarcUriParser>()
+                .AddConditionally(
+                    "MigrationAdvisories",
+                    featureActiveRegistrations =>
+                    {
+                        featureActiveRegistrations.AddTransient<IRule<DmarcRecords>, MigrationOnlyOneDmarcRecord>();
+                    },
+                    featureInactiveRegistrations =>
+                    {
+                        featureInactiveRegistrations.AddTransient<IRule<DmarcRecords>, OnlyOneDmarcRecord>();
+                    });
         }
 
         private static ILookupClient CreateLookupClient(IServiceProvider provider)
@@ -95,12 +106,16 @@ namespace MailCheck.Dmarc.Poller.StartUp
                 {
                     Timeout = provider.GetRequiredService<IDmarcPollerConfig>().DnsRecordLookupTimeout
                 }
-                : new LookupClient(provider.GetService<IDnsNameServerProvider>().GetNameServers()
+                : new LookupClient(new LookupClientOptions(provider.GetService<IDnsNameServerProvider>()
+                    .GetNameServers()
                     .Select(_ => new IPEndPoint(_, 53)).ToArray())
                 {
-                    Timeout = provider.GetRequiredService<IDmarcPollerConfig>().DnsRecordLookupTimeout,
+                    ContinueOnEmptyResponse = false,
+                    UseCache = false,
                     UseTcpOnly = true,
-                };
+                    EnableAuditTrail = true,
+                    Timeout = provider.GetRequiredService<IDmarcPollerConfig>().DnsRecordLookupTimeout
+                });
         }
     }
 }

@@ -26,7 +26,7 @@ namespace MailCheck.Dmarc.Poller
 
         public DmarcProcessor(
             IDnsClient dnsClient,
-            IDmarcRecordsParser dmarcRecordsParser, 
+            IDmarcRecordsParser dmarcRecordsParser,
             IDmarcPollerConfig config,
             ILogger<DmarcProcessor> log)
         {
@@ -46,26 +46,19 @@ namespace MailCheck.Dmarc.Poller
 
             if (dmarcDnsRecords.IsErrored)
             {
-                if (_config.AllowNullResults)
-                {
-                    return new DmarcPollResult(domain,
-                        new Error(Id, ErrorType.Error,
-                            $"Failed DMARC record query for {domain} with error {dmarcDnsRecords.Error}", string.Empty));
-                }
+                string message = $"Failed DMARC record query for {domain} with error {dmarcDnsRecords.Error}";
 
-                throw new DmarcPollerException($"Error occurred attempting to retrieve DMARC records for {domain}: {dmarcDnsRecords.Error}");
+                _log.LogError($"{message} {Environment.NewLine} Audit Trail: {dmarcDnsRecords.AuditTrail}");
+
+                return new DmarcPollResult(domain,
+                    new Error(Id, ErrorType.Error, message, string.Empty));
             }
 
-            if (dmarcDnsRecords.Value.Count == 0 || dmarcDnsRecords.Value.TrueForAll(x => string.IsNullOrWhiteSpace(x.Record)))
+            if (dmarcDnsRecords.Value.Count == 0 ||
+                dmarcDnsRecords.Value.TrueForAll(x => string.IsNullOrWhiteSpace(x.Record)))
             {
-                string message = $"DMARC records missing or empty for {domain}.";
-
-                if (!_config.AllowNullResults)
-                {
-                    throw new DmarcPollerException(message);
-                }
-
-                _log.LogDebug(message);
+                _log.LogInformation(
+                    $"DMARC records missing or empty for {domain}, Name server: {dmarcDnsRecords.NameServer}");
             }
 
             DmarcRecords records =

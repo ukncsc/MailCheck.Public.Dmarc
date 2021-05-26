@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MailCheck.Common.Data.Abstractions;
+using Dapper;
+using MailCheck.Common.Data;
 using MailCheck.Dmarc.Scheduler.Dao.Model;
-using MySql.Data.MySqlClient;
-using MySqlHelper = MailCheck.Common.Data.Util.MySqlHelper;
 
 namespace MailCheck.Dmarc.Scheduler.Dao
 {
@@ -11,48 +10,52 @@ namespace MailCheck.Dmarc.Scheduler.Dao
     {
         Task<DmarcSchedulerState> Get(string domain);
         Task Save(DmarcSchedulerState state);
-        Task Delete(string domain);
+        Task<int> Delete(string domain);
     }
 
     public class DmarcSchedulerDao : IDmarcSchedulerDao
     {
-        private readonly IConnectionInfoAsync _connectionInfo;
+        private readonly IDatabase _database;
 
-        public DmarcSchedulerDao(IConnectionInfoAsync connectionInfo)
+        public DmarcSchedulerDao(IDatabase database)
         {
-            _connectionInfo = connectionInfo;
+            _database = database;
         }
 
         public async Task<DmarcSchedulerState> Get(string domain)
         {
-            string id = (string)await MySqlHelper.ExecuteScalarAsync(
-                await _connectionInfo.GetConnectionStringAsync(),
-                DmarcSchedulerDaoResources.SelectDmarcRecord,
-                new MySqlParameter("id", domain));
-
-            return id == null
-                ? null
-                : new DmarcSchedulerState(id);
+            using (var connection = await _database.CreateAndOpenConnectionAsync())
+            {
+                string id = await connection.QueryFirstOrDefaultAsync<string>(DmarcSchedulerDaoResources.SelectDmarcRecord,
+                    new {id = domain});
+                
+                return id == null
+                    ? null
+                    : new DmarcSchedulerState(id);
+            }
         }
 
         public async Task Save(DmarcSchedulerState state)
         {
-            int numberOfRowsAffected = await MySqlHelper.ExecuteNonQueryAsync(
-                await _connectionInfo.GetConnectionStringAsync(),
-                DmarcSchedulerDaoResources.InsertDmarcRecord,
-                new MySqlParameter("id", state.Id.ToLower()));
-
-            if (numberOfRowsAffected == 0)
+            using (var connection = await _database.CreateAndOpenConnectionAsync())
             {
-                throw new InvalidOperationException($"Didn't save duplicate {nameof(DmarcSchedulerState)} for {state.Id}");
+                int numberOfRowsAffected = await connection.ExecuteAsync(DmarcSchedulerDaoResources.InsertDmarcRecord,
+                    new {id = state.Id.ToLower()});
+                
+                if (numberOfRowsAffected == 0)
+                {
+                    throw new InvalidOperationException($"Didn't save duplicate {nameof(DmarcSchedulerState)} for {state.Id}");
+                }
             }
         }
 
-        public async Task Delete(string domain)
+        public async Task<int> Delete(string domain)
         {
-            string connectionString = await _connectionInfo.GetConnectionStringAsync();
-
-            await MySqlHelper.ExecuteNonQueryAsync(connectionString, DmarcSchedulerDaoResources.DeleteDmarcRecord, new MySqlParameter("id", domain));
+            using (var connection = await _database.CreateAndOpenConnectionAsync())
+            {
+                return await connection.ExecuteAsync(DmarcSchedulerDaoResources.DeleteDmarcRecord,
+                    new { id = domain });
+            }
         }
     }
 }

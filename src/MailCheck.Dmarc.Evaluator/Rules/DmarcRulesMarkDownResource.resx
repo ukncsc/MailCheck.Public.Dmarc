@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+    <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,70 +59,70 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string" />
+                            <xsd:attribute name="type" type="xsd:string" />
+                            <xsd:attribute name="mimetype" type="xsd:string" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string" />
+                            <xsd:attribute name="name" type="xsd:string" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+                            <xsd:attribute ref="xml:space" />
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" />
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="InvestigateRejectedEmailsOnDomainsWithRejectPolicy" xml:space="preserve">
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="InvestigateRejectedEmailsOnDomainsWithRejectPolicy" xml:space="preserve">
     <value>Investigate the source of these emails to identify if it's the result of an attack, if so then the recipients should be protected by your DMARC policy and no further action is required.
 
 Alternatively if it is legitimate email, you will require changes to your SPF and DKIM configuration.</value>
   </data>
-  <data name="PctValueShouldBe100ErrorMessage" xml:space="preserve">
+    <data name="PctValueShouldBe100ErrorMessage" xml:space="preserve">
     <value>You are not applying this DMARC policy to all of your email, therefore {0}% will:
 
 - not be validated against SPF and DKIM.
@@ -132,22 +132,25 @@ Alternatively if it is legitimate email, you will require changes to your SPF an
 
 Increase the percentage value to 100% as soon as you have confirmed that legitimate email has been sucessfully delivered.</value>
   </data>
-  <data name="PercentageOfRejectedEmailsOnDate" xml:space="preserve">
+    <data name="PercentageOfRejectedEmailsOnDate" xml:space="preserve">
     <value>On {0} over {1}% of your email was not delivered to end users.</value>
   </data>
-  <data name="PolicyShouldBeQuarantineOrRejectErrorMessage" xml:space="preserve">
-    <value>Now you have enabled DMARC in monitoring mode with a policy of none, you will start receiving reports from mail servers across the globe.
+    <data name="PolicyShouldBeQuarantineOrRejectErrorMessage" xml:space="preserve">
+    <value>You currently have a DMARC policy of ‘none’, which will enable you to monitor whether emails sent from this domain are trusted by recipients, based on whether they are passing SPF and/or DKIM checks.
 
-Identify your legitimate senders from these reports and add them to your SPF record and/or enable DKIM signing.
+DMARC reports will allow you to identify your legitimate sending systems and improve SPF and/or DKIM for each. DMARC reports will also show any malicious email senders that are spoofing your domain.
 
-Once all of your untrusted email looks like spam you are ready to change your policy to quarantine or reject.</value>
+Once you have set up SPF and/or DKIM on each system, and any remaining untrusted email looked malicious, you will be ready to proceed to a DMARC policy of Quarantine or Reject.
+
+Further information on SPF, DKIM and DMARC can be found in our online guidance:
+https://www.ncsc.gov.uk/collection/email-security-and-anti-spoofing/configure-anti-spoofing-controls-</value>
   </data>
-  <data name="RuaTagShouldNotContainDuplicateUrisErrorMessage" xml:space="preserve">
+    <data name="RuaTagShouldNotContainDuplicateUrisErrorMessage" xml:space="preserve">
     <value>This DMARC record includes the same aggregate reporting destination twice in the rua tag, the duplicate entry should be removed.
 
 `dmarc record with duplicate removed`</value>
   </data>
-  <data name="RuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage" xml:space="preserve">
+    <data name="RuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage" xml:space="preserve">
     <value>Your DMARC record contains the wrong email address for Mail Check aggregate report processing.
 
 Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`
@@ -158,7 +161,34 @@ Reports of email received should be sent to the NCSC Mail Check service `(rua=ma
 
 `{0}`</value>
   </data>
-  <data name="RuaTagsShouldContainDmarcServiceMailBoxErrorMessage" xml:space="preserve">
+    <data name="MigrationRuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage" xml:space="preserve">
+    <value>Your DMARC record contains the wrong email address for Mail Check aggregate report processing.
+
+------
+
+### If you manage your domains in Mail Check
+
+Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`
+
+**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain {2} to a Workspace and click Verify.
+
+**Step 2: Alter your DMARC record.** Please change your DMARC record to be the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:
+
+`{0}`
+
+------
+
+### If you manage your domains in MyNCSC
+
+Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`
+
+**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)
+
+**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:
+
+`{1}`</value>
+  </data>
+    <data name="RuaTagsShouldContainDmarcServiceMailBoxErrorMessage" xml:space="preserve">
     <value>The DMARC record does not contain the NCSC Mail Check email address, it's fine to use other tools but be aware that we won't be able to help you investigate email abuse, and you won't see any reporting in Mail Check.
 
 Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`
@@ -169,7 +199,34 @@ Reports of email received should be sent to the NCSC Mail Check service `(rua=ma
 
 `{0}`</value>
   </data>
-  <data name="SubdomainPolicyMustBeQuarantineOrRejectErrorMessage" xml:space="preserve">
+    <data name="MigrationRuaTagsShouldContainDmarcServiceMailBoxErrorMessage" xml:space="preserve">
+    <value>The DMARC record does not contain the NCSC Mail Check email address, it's fine to use other tools but be aware that we won't be able to help you investigate email abuse, and you won't see any reporting in Mail Check.
+
+------
+
+### If you manage your domains in Mail Check
+
+Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)`
+
+**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain {2} to a Workspace and click Verify.
+
+**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following, ensuring you replace **INSERT_TOKEN_HERE** with the Verification Token:
+
+`{0}`
+
+------
+
+### If you manage your domains in MyNCSC
+
+Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`
+
+**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)
+
+**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:
+
+`{1}`</value>
+  </data>
+    <data name="SubdomainPolicyMustBeQuarantineOrRejectErrorMessage" xml:space="preserve">
     <value>The subdomain policy on this organizational domain is set to none, this means that any subdomain can be spoofed by attackers.
 
 If you have a manageable number of subdomains you may wish to create a DMARC policy of p=none on those subdomains and remove the sp policy,

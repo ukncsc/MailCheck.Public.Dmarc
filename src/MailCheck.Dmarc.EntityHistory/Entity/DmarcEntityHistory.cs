@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using MailCheck.Common.Contracts.Messaging;
 using MailCheck.Common.Messaging.Abstractions;
-using MailCheck.Dmarc.Contracts.External;
-using MailCheck.Dmarc.Contracts.History;
 using MailCheck.Dmarc.Contracts.Poller;
-using MailCheck.Dmarc.EntityHistory.Config;
 using MailCheck.Dmarc.EntityHistory.Dao;
 using MailCheck.Dmarc.EntityHistory.Service;
 using Microsoft.Extensions.Logging;
 
 namespace MailCheck.Dmarc.EntityHistory.Entity
 {
-    public class DmarcEntityHistory : IHandle<DomainCreated>,
+    public class DmarcEntityHistory : 
+        IHandle<DomainCreated>,
         IHandle<DmarcRecordsPolled>
     {
         private readonly IDmarcEntityHistoryDao _dao;
@@ -30,20 +29,19 @@ namespace MailCheck.Dmarc.EntityHistory.Entity
 
         public async Task Handle(DomainCreated message)
         {
-            string messageId = message.Id.ToLower();
+            string domain = message.Id.ToLower();
 
-            DmarcEntityHistoryState state = await _dao.Get(messageId);
+            DmarcEntityHistoryState state = await _dao.Get(domain);
 
             if (state == null)
             {
-                state = new DmarcEntityHistoryState(messageId);
+                state = new DmarcEntityHistoryState(domain);
                 await _dao.Save(state);
-                _log.LogInformation("Created DmarcHistoryEntity for {Id}.", messageId);
+                _log.LogInformation($"Created DmarcHistoryEntity for {domain}.");
             }
             else
             {
-                _log.LogWarning("Ignoring {EventName} as DmarcHistoryEntity already exists for {Id}.",
-                    nameof(DomainCreated), messageId);
+                _log.LogInformation($"Ignoring {nameof(DomainCreated)} as DmarcHistoryEntity already exists for {domain}.");
             }
         }
 

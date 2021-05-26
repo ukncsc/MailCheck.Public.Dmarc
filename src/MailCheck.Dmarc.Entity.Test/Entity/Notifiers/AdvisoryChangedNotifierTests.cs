@@ -10,6 +10,7 @@ using MailCheck.Dmarc.Entity.Config;
 using MailCheck.Dmarc.Entity.Entity;
 using MailCheck.Dmarc.Entity.Entity.Notifications;
 using MailCheck.Dmarc.Entity.Entity.Notifiers;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using Message = MailCheck.Dmarc.Contracts.SharedDomain.Message;
 using MessageDisplay = MailCheck.Dmarc.Entity.Entity.Notifications.MessageDisplay;
@@ -23,6 +24,7 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         private IMessageDispatcher _messageDispatcher;
         private IDmarcEntityConfig _dmarcEntityConfig;
         private IEqualityComparer<Message> _messageEqualityComparer;
+        private ILogger<AdvisoryChangedNotifier> _logger;
         private AdvisoryChangedNotifier _advisoryChangedNotifier;
 
         [SetUp]
@@ -31,7 +33,6 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
             _messageDispatcher = A.Fake<IMessageDispatcher>();
             _dmarcEntityConfig = A.Fake<IDmarcEntityConfig>();
             _messageEqualityComparer = new MessageEqualityComparer();
-
             _advisoryChangedNotifier = new AdvisoryChangedNotifier(_messageDispatcher, _dmarcEntityConfig, _messageEqualityComparer);
         }
 
@@ -47,10 +48,12 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
 
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryAdded>._, A<string>._)).MustNotHaveHappened();
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>.That.Matches(x => x.Messages.First().Text == "testText1"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustHaveHappenedOnceExactly();
         }
 
         [Test]
-        public void DoesNotNotifyWhenNoChanges_DataInMessages()
+        public void WhenNoChangeSendsAdvisorySustained()
         {
             Guid messageId = Guid.NewGuid();
 
@@ -59,11 +62,14 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage), CreateDmarcRecordsEvaluatedWithMessages(newMessage));
 
-            A.CallTo(() => _messageDispatcher.Dispatch(A<Common.Messaging.Abstractions.Message>.Ignored, A<string>.Ignored)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryAdded>._, A<string>._)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>.That.Matches(x => x.Messages.First().Text == "testText"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustHaveHappenedOnceExactly();
         }
 
         [Test]
-        public void NotifiesWhenMessageTypeChanges_DataInMessages()
+        public void RaisesAddedAndRemovedWhenNewMessageTypeChanged()
         {
             Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
             Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.error, "testText", string.Empty);
@@ -75,10 +81,11 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
 
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustHaveHappenedOnceExactly();
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>.That.Matches(x => x.Messages.First().MessageType == MessageType.info), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustNotHaveHappened();
         }
 
         [Test]
-        public void NotifiesWhenMessageTextChanges_DataInMessages()
+        public void RaisesAddedAndRemovedWhenNewMessageTextChanged()
         {
             Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
             Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
@@ -90,10 +97,11 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
 
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustHaveHappenedOnceExactly();
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>.That.Matches(x => x.Messages.First().Text == "testText1"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustNotHaveHappened();
         }
 
         [Test]
-        public void NotifiesWhenMessageDisplayChanges_DataInMessages()
+        public void RaisesAddedAndRemovedWhenNewMessagesAdded()
         {
             Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
             Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "newTestText", string.Empty);
@@ -105,10 +113,11 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
 
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustHaveHappenedOnceExactly();
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>.That.Matches(x => x.Messages.First().Text == "testText"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustNotHaveHappened();
         }
 
         [Test]
-        public void NotifiesWhenMessageAdded_DataInMessages()
+        public void RaisesAdvisoryAddedAndAdvisorySustainedWhenNewMessageAddedToExistingList()
         {
             Guid messageId = Guid.NewGuid();
 
@@ -123,10 +132,12 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryAdded>.That.Matches(x => x.Messages.First().Text == "testText2"), A<string>._)).MustHaveHappenedOnceExactly();
 
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>.That.Matches(x => x.Messages.First().Text == "testText1"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustHaveHappenedOnceExactly();
         }
 
         [Test]
-        public void NotifiesWhenMessageRemoved_DataInMessages()
+        public void RaisesAdvisoryRemovedAndAdvisorySustainedWhenRemovedFromExistingList()
         {
             Guid messageId = Guid.NewGuid();
 
@@ -141,10 +152,12 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
 
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustHaveHappenedOnceExactly();
             A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>.That.Matches(x => x.Messages.First().Text == "testText2"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>.That.Matches(x => x.Messages.First().Text == "testText1"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustHaveHappenedOnceExactly();
         }
 
         [Test]
-        public void DoesNotNotifyWhenNoChanges_DataInRecords()
+        public void RaisesDmarcAdvisorySustainedWhenNoChangeTest()
         {
             Guid messageId = Guid.NewGuid();
 
@@ -153,11 +166,14 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithRecords(existingMessage), CreateDmarcRecordsEvaluatedWithRecords(newMessage));
 
-            A.CallTo(() => _messageDispatcher.Dispatch(A<Common.Messaging.Abstractions.Message>.Ignored, A<string>.Ignored)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryAdded>._, A<string>._)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisoryRemoved>._, A<string>._)).MustNotHaveHappened();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>.That.Matches(x => x.Messages.First().Text == "testText"), A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => _messageDispatcher.Dispatch(A<DmarcAdvisorySustained>._, A<string>._)).MustHaveHappenedOnceExactly();
         }
 
         [Test]
-        public void NotifiesWhenMessageTypeChanges_DataInRecords()
+        public void RaisesAdvisoryAddedWhenMessageTypeChanges()
         {
             Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
             Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.error, "testText", string.Empty);
@@ -172,7 +188,7 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         }
 
         [Test]
-        public void NotifiesWhenMessageTextChanges_DataInRecords()
+        public void RaisesAdvisoryAddedAndAdivosryRemovedWhenMessageReplaced()
         {
             Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
             Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
@@ -187,7 +203,7 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         }
 
         [Test]
-        public void NotifiesWhenMessageDisplayChanges_DataInRecords()
+        public void RaisesAdvisoryAddedWhenMessageDisplayTypeChanges()
         {
             Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty, Contracts.SharedDomain.MessageDisplay.Prompt);
             Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
@@ -201,7 +217,7 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         }
 
         [Test]
-        public void NotifiesWhenMessageAdded_DataInRecords()
+        public void RaisesAdvisoryAddedWhenMessageAdded()
         {
             Guid messageId = Guid.NewGuid();
 
@@ -219,7 +235,7 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         }
 
         [Test]
-        public void NotifiesWhenMessageRemoved_DataInRecords()
+        public void RaisesAdvisoryRemovedWhenMessageRemoved()
         {
             Guid messageId = Guid.NewGuid();
 

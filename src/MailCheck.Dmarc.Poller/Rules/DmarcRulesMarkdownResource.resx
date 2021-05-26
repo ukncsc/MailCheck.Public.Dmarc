@@ -128,12 +128,44 @@ This tells anyone receiving email from you that:
 - any messages that fail DMARC checks should still be delivered `(p=none)` 
 - any messages that fail DMARC checks should still be delivered for any subdomains `(sp=none)` 
 - they should send reports of email received to the NCSC Mail Check service `(rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk)` 
-
+            
 **Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain {0} to a Workspace and click Verify.
 
 **Step 2: Create a DMARC record.** Publish this text (TXT) record to the DNS zone for {0}, ensuring you replace **INSERT_TOKEN_HERE** with the token you obtain from the previous steps:
 
 `_dmarc.{0} TXT v=DMARC1;p=none;rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`</value>
+  </data>
+  <data name="MigrationNoDmarcErrorMessage" xml:space="preserve">
+    <value>### Publish a DMARC record to enable DMARC reporting
+
+_This won't affect your email deliverability and will enable reporting to Mail Check_
+
+This tells anyone receiving email from you that:
+
+- you have a DMARC policy `(v=DMARC1)` 
+- any messages that fail DMARC checks should still be delivered `(p=none)` 
+- any messages that fail DMARC checks should still be delivered for any subdomains `(sp=none)` 
+- they should send reports of email received to the NCSC Mail Check service `(rua=mailto:)` 
+
+-------
+            
+### If you manage your domains in Mail Check
+
+**Step 1: Obtain a Verification Token.** In the Manage Workspaces area, add the domain {0} to a Workspace and click Verify.
+
+**Step 2: Create a DMARC record.** Publish this text (TXT) record to the DNS zone for {0}, ensuring you replace **INSERT_TOKEN_HERE** with the token you obtain from the previous steps:
+
+`_dmarc.{0} TXT v=DMARC1;p=none;rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`
+
+-------
+        
+### If you manage your domains in MyNCSC
+
+**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC](https://hub.service.ncsc.gov.uk/)
+            
+**Step 2: Create your DMARC record.** Publish this text (TXT) record to the DNS zone for {0}:
+            
+`_dmarc.{0} TXT v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk;`</value>
   </data>
   <data name="OnlyOneDmarcRecordErrorMessage" xml:space="preserve">
     <value>It looks like there are multiple DMARC records for this domain, this isn't valid as there can only be one.

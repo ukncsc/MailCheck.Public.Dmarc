@@ -33,7 +33,7 @@ namespace MailCheck.Dmarc.Poller.Dns
         public async Task<DnsResult<List<DmarcRecordInfo>>> GetDmarcRecords(string domain)
         {
             IDnsQueryResponse response = await _lookupClient.QueryAsync(FormatQuery(domain), QueryType.TXT);
-
+            
             OrganisationalDomain organisationalDomain =
                 await _organisationalDomainProvider.GetOrganisationalDomain(domain);
 
@@ -42,7 +42,7 @@ namespace MailCheck.Dmarc.Poller.Dns
             bool isTld = organisationalDomain.IsTld;
 
             List<DmarcRecordInfo> dnsRecords = GetDmarcRecords(response, orgDomain, isTld);
-
+            
             if (!dnsRecords.Any())
             {
                 if (!organisationalDomain.IsOrgDomain && !organisationalDomain.IsTld)
@@ -54,10 +54,10 @@ namespace MailCheck.Dmarc.Poller.Dns
 
             if (response.HasError && response.ErrorMessage != NON_EXISTENT_DOMAIN_ERROR && response.ErrorMessage != SERV_FAILURE_ERROR)
             {
-                return new DnsResult<List<DmarcRecordInfo>>(response.ErrorMessage);
+                return new DnsResult<List<DmarcRecordInfo>>(response.ErrorMessage, response.NameServer.ToString(), response.AuditTrail);
             }
 
-            return new DnsResult<List<DmarcRecordInfo>>(dnsRecords, response.MessageSize);
+            return new DnsResult<List<DmarcRecordInfo>>(dnsRecords, response.MessageSize, response.NameServer?.ToString(), response.AuditTrail);
         }
 
         private List<DmarcRecordInfo> GetDmarcRecords(IDnsQueryResponse response, string orgDomain = null, bool isTld = false, bool isInherited = false)

@@ -45,7 +45,7 @@ namespace MailCheck.Dmarc.EntityHistory.Dao
 
             await MySqlHelper.ExecuteNonQueryAsync(connectionString,
                 DmarcEntityHistoryDaoResouces.InsertDmarcEntityHistory,
-                new MySqlParameter("domain", state.Id),
+                new MySqlParameter("domain", state.Id.ToLower()),
                 new MySqlParameter("state", serializedState));
         }
     }

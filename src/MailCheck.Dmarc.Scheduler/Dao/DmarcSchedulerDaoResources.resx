@@ -121,9 +121,9 @@
     <value>DELETE FROM dmarc_scheduled_records WHERE id =@id;</value>
   </data>
   <data name="InsertDmarcRecord" xml:space="preserve">
-    <value>INSERT IGNORE INTO dmarc_scheduled_records (id, last_checked) VALUES (LOWER(@id), UTC_TIMESTAMP());</value>
+    <value>INSERT IGNORE INTO dmarc_scheduled_records (id, last_checked) VALUES (@id, UTC_TIMESTAMP());</value>
   </data>
   <data name="SelectDmarcRecord" xml:space="preserve">
-    <value>SELECT id FROM dmarc_scheduled_records WHERE LOWER(id) = LOWER(@id);</value>
+    <value>SELECT id FROM dmarc_scheduled_records WHERE id = @id;</value>
   </data>
 </root>

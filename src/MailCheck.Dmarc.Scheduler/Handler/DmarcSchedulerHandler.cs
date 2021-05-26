@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using MailCheck.Common.Contracts.Messaging;
 using MailCheck.Common.Messaging.Abstractions;
 using MailCheck.Dmarc.Contracts.Entity;
-using MailCheck.Dmarc.Contracts.External;
 using MailCheck.Dmarc.Scheduler.Config;
 using MailCheck.Dmarc.Scheduler.Dao;
 using MailCheck.Dmarc.Scheduler.Dao.Model;
@@ -54,8 +54,16 @@ namespace MailCheck.Dmarc.Scheduler.Handler
         public async Task Handle(DomainDeleted message)
         {
             string domain = message.Id.ToLower();
-            await _dao.Delete(domain);
-            _log.LogInformation($"Deleted schedule for DMARC entity with id: {domain}.");
+            int rows = await _dao.Delete(domain);
+            if (rows == 1)
+            {
+                _log.LogInformation($"Deleted schedule for DMARC entity with id: {domain}.");
+            }
+            else
+            {
+                _log.LogInformation($"Schedule already deleted for DMARC entity with id: {domain}.");
+            }
+            
         }
     }
 }

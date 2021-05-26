@@ -5,6 +5,7 @@ using MailCheck.Common.Logging;
 using MailCheck.Common.Messaging.Abstractions;
 using MailCheck.Common.SSM;
 using MailCheck.Common.Util;
+using MailCheck.Common.Environment.FeatureManagement;
 using MailCheck.Dkim.Client;
 using MailCheck.Dmarc.Contracts.Poller;
 using MailCheck.Dmarc.Contracts.SharedDomain;
@@ -59,7 +60,6 @@ namespace MailCheck.Dmarc.Evaluator.StartUp
                 .AddTransient<IRule<DmarcRecord>, PctValueShouldBe100>()
                 .AddTransient<IRule<DmarcRecord>, PolicyShouldBeQuarantineOrReject>()
                 .AddTransient<IRule<DmarcRecord>, NudgeAlongFromPolicyOfNone>()
-                .AddTransient<IRule<DmarcRecord>, RuaTagsShouldContainDmarcServiceMailBox>()
                 .AddTransient<IRule<DmarcRecord>, RufTagShouldNotContainDmarcServiceMailBox>()
                 .AddTransient<IRule<DmarcRecord>, ShouldHaveSpfRecordWIthPolicyOfQuarantineOrReject>()
                 .AddTransient<IRule<DmarcRecord>, SubDomainPolicyShouldBeQuarantineOrReject>()
@@ -70,7 +70,17 @@ namespace MailCheck.Dmarc.Evaluator.StartUp
                 .AddSpfApiKeyClient()
                 .AddDkimApiKeyClient()
                 .AddAggregateReportApiKeyClient()
-                .AddSerilogLogging();
+                .AddSerilogLogging()
+                .AddConditionally(
+                    "MigrationAdvisories",
+                    featureActiveRegistrations =>
+                    {
+                        featureActiveRegistrations.AddTransient<IRule<DmarcRecord>, MigrationRuaTagsShouldContainDmarcServiceMailBox>();
+                    },
+                    featureInactiveRegistrations =>
+                    {
+                        featureInactiveRegistrations.AddTransient<IRule<DmarcRecord>, RuaTagsShouldContainDmarcServiceMailBox>();
+                    });
         }
     }
 }

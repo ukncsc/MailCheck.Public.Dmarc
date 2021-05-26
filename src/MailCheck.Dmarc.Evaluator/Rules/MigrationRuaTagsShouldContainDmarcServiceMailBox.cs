@@ -8,7 +8,7 @@ using MailCheck.Dmarc.Contracts.SharedDomain;
 
 namespace MailCheck.Dmarc.Evaluator.Rules
 {
-    public class RuaTagsShouldContainDmarcServiceMailBox : IRule<DmarcRecord>
+    public class MigrationRuaTagsShouldContainDmarcServiceMailBox : IRule<DmarcRecord>
     {
         private readonly Uri _dmarcMailbox;
         private readonly string _allowedRuaDomain;
@@ -16,7 +16,7 @@ namespace MailCheck.Dmarc.Evaluator.Rules
         private readonly Uri _dmarcVerificationMailbox;
         private readonly string _dmarcVerificationMailboxAddress;
 
-        public RuaTagsShouldContainDmarcServiceMailBox()
+        public MigrationRuaTagsShouldContainDmarcServiceMailBox()
         {
             _dmarcMailbox = new Uri(DmarcRulesResource.RuaMailbox);
             _dmarcVerificationMailbox = new Uri(DmarcRulesResource.VerificationRuaMailbox);
@@ -57,7 +57,7 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
             if (unexpectedMailCheckUris.Any() && otherAllowedRuaCount == 0)
             {
-                string template = DmarcRulesMarkDownResource.RuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage;
+                string template = DmarcRulesMarkDownResource.MigrationRuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage;
 
                 Regex ruaRegex = new Regex("rua=[^;]+;");
 
@@ -74,17 +74,20 @@ namespace MailCheck.Dmarc.Evaluator.Rules
                 suggestedRuaTag = suggestedRuaTag.Replace("=,", "=");
 
                 string delimiter = reportUris.Count > mailCheckUris.Count ? "," : "";
-                suggestedRuaTag = suggestedRuaTag.Replace("rua=", $"rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk{delimiter}");
+                string mailcheckSuggestedRuaTag = suggestedRuaTag.Replace("rua=", $"rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk{delimiter}");
+                string myncscSuggestedRuaTag = suggestedRuaTag.Replace("rua=", $"rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk{delimiter}");
 
-                string suggestedRecord = recordText;
-                if (!string.IsNullOrEmpty(suggestedRecord) && !string.IsNullOrEmpty(currentRuaTag) && !string.IsNullOrEmpty(suggestedRuaTag))
+                string mailcheckSuggestedRecord = recordText;
+                string myncscSuggestedRecord = recordText;
+                if (!string.IsNullOrEmpty(mailcheckSuggestedRecord) && !string.IsNullOrEmpty(myncscSuggestedRecord) && !string.IsNullOrEmpty(currentRuaTag) && !string.IsNullOrEmpty(mailcheckSuggestedRuaTag) && !string.IsNullOrEmpty(myncscSuggestedRuaTag))
                 {
-                    suggestedRecord = suggestedRecord.Replace(currentRuaTag, suggestedRuaTag);
+                    mailcheckSuggestedRecord = mailcheckSuggestedRecord.Replace(currentRuaTag, mailcheckSuggestedRuaTag);
+                    myncscSuggestedRecord = myncscSuggestedRecord.Replace(currentRuaTag, myncscSuggestedRuaTag);
                 }
 
-                string markdown = string.Format(template, suggestedRecord, record.Domain);
+                string markdown = string.Format(template, mailcheckSuggestedRecord, myncscSuggestedRecord, record.Domain);
 
-                return new Message(Guid.Parse("85DB50C5-E3DA-479A-A9CE-1B07C81C3747"), MessageSources.DmarcEvaluator, MessageType.error, string.Format(
+                return new Message(Guid.Parse("030F78E8-EAA9-48EE-9458-93080AAB57B0"), MessageSources.DmarcEvaluator, MessageType.error, string.Format(
                         DmarcRulesResource.RuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage,
                         _dmarcVerificationMailboxAddress,
                         _dmarcVerificationMailbox.OriginalString), markdown
@@ -94,30 +97,34 @@ namespace MailCheck.Dmarc.Evaluator.Rules
             if (!mailCheckUris.Any() && otherAllowedRuaCount == 0)
             {
                 string dmarcRecord = recordText;
+                string mailcheckDmarcRecord;
+                string myncscDmarcRecord;
 
                 dmarcRecord = NeatenRecord(dmarcRecord);
 
                 if (dmarcRecord.Contains("rua="))
                 {
-                    dmarcRecord = dmarcRecord.Replace("rua=", $"rua={DmarcRulesResource.VerificationRuaMailbox},");
+                    mailcheckDmarcRecord = dmarcRecord.Replace("rua=", $"rua={DmarcRulesResource.VerificationRuaMailbox},");
+                    myncscDmarcRecord = dmarcRecord.Replace("rua=", $"rua={DmarcRulesResource.RuaMailbox},");
                 }
                 else
                 {
-                    dmarcRecord = $"{dmarcRecord}rua={DmarcRulesResource.VerificationRuaMailbox};";
+                    mailcheckDmarcRecord = $"{dmarcRecord}rua={DmarcRulesResource.VerificationRuaMailbox};";
+                    myncscDmarcRecord = $"{dmarcRecord}rua={DmarcRulesResource.RuaMailbox};";
                 }
 
                 dmarcRecord = dmarcRecord.TrimEnd();
 
-                return new Message(Guid.Parse("045C9D62-8771-4D8F-B981-EAC70C7B74A2"), MessageSources.DmarcEvaluator, MessageType.warning, string.Format(DmarcRulesResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage,
+                return new Message(Guid.Parse("6F1C3B66-CFB4-4CEB-BF6B-DC81637FC2B0"), MessageSources.DmarcEvaluator, MessageType.warning, string.Format(DmarcRulesResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage,
                         _dmarcVerificationMailboxAddress,
                         _dmarcVerificationMailbox.OriginalString),
-                    string.Format(DmarcRulesMarkDownResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage, dmarcRecord, record.Domain));
+                    string.Format(DmarcRulesMarkDownResource.MigrationRuaTagsShouldContainDmarcServiceMailBoxErrorMessage, mailcheckDmarcRecord, myncscDmarcRecord, record.Domain));
 
             }
 
             if (reportUris.GroupBy(_ => _.OriginalString).Any(_ => _.Count() > 1))
             {
-                return new Message(Guid.Parse("354DDFCE-B9DE-4C3B-93BD-A120408ED94A"), MessageSources.DmarcEvaluator, MessageType.warning,
+                return new Message(Guid.Parse("EBB3FE7C-E80A-48C0-B0F1-79C8E88F0F12"), MessageSources.DmarcEvaluator, MessageType.warning,
                     DmarcRulesResource.RuaTagShouldNotContainDuplicateUrisErrorMessage, DmarcRulesMarkDownResource.RuaTagShouldNotContainDuplicateUrisErrorMessage);
             }
 

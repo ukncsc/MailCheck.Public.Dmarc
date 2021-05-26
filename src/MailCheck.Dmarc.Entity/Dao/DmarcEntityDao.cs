@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MailCheck.Common.Data;
 using MailCheck.Common.Data.Abstractions;
 using MailCheck.Dmarc.Entity.Entity;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using MySqlHelper = MailCheck.Common.Data.Util.MySqlHelper;
 
 namespace MailCheck.Dmarc.Entity.Dao
@@ -14,7 +12,7 @@ namespace MailCheck.Dmarc.Entity.Dao
     {
         Task<DmarcEntityState> Get(string domain);
         Task Save(DmarcEntityState state);
-        Task Delete(string domain);
+        Task<int> Delete(string domain);
     }
 
     public class DmarcEntityDao : IDmarcEntityDao
@@ -45,7 +43,7 @@ namespace MailCheck.Dmarc.Entity.Dao
             string serializedState = JsonConvert.SerializeObject(state);
 
             int rowsAffected = await MySqlHelper.ExecuteNonQueryAsync(connectionString, DmarcEntityDaoResouces.InsertDmarcEntity,
-                new MySqlParameter("domain", state.Id),
+                new MySqlParameter("domain", state.Id.ToLower()),
                 new MySqlParameter("version", state.Version),
                 new MySqlParameter("state", serializedState));
 
@@ -56,11 +54,11 @@ namespace MailCheck.Dmarc.Entity.Dao
             }
         }
 
-        public async Task Delete(string domain)
+        public async Task<int> Delete(string domain)
         {
             string connectionString = await _connectionInfoAsync.GetConnectionStringAsync();
 
-            await MySqlHelper.ExecuteNonQueryAsync(connectionString, DmarcEntityDaoResouces.DeleteDmarcEntity, new MySqlParameter("id", domain));
+            return await MySqlHelper.ExecuteNonQueryAsync(connectionString, DmarcEntityDaoResouces.DeleteDmarcEntity, new MySqlParameter("id", domain));
         }
     }
 }

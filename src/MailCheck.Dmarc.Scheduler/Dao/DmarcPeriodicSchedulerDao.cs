@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
-using MailCheck.Common.Data.Abstractions;
 using MailCheck.Dmarc.Scheduler.Config;
 using MailCheck.Dmarc.Scheduler.Dao.Model;
-using MySql.Data.MySqlClient;
-using MailCheck.Common.Data.Util;
-using MySqlHelper = MailCheck.Common.Data.Util.MySqlHelper;
+using System;
+using MailCheck.Common.Util;
+using MailCheck.Common.Data;
+using Dapper;
 
 namespace MailCheck.Dmarc.Scheduler.Dao
 {
@@ -16,55 +15,46 @@ namespace MailCheck.Dmarc.Scheduler.Dao
         Task UpdateLastChecked(List<DmarcSchedulerState> entitiesToUpdate);
         Task<List<DmarcSchedulerState>> GetExpiredDmarcRecords();
     }
-
+    
     public class DmarcPeriodicSchedulerDao : IDmarcPeriodicSchedulerDao
     {
-        private readonly IConnectionInfoAsync _connectionInfo;
+        private readonly IDatabase _database;
         private readonly IDmarcPeriodicSchedulerConfig _config;
+        private readonly IClock _clock;
 
-        public DmarcPeriodicSchedulerDao(IConnectionInfoAsync connectionInfo, IDmarcPeriodicSchedulerConfig config)
+        public DmarcPeriodicSchedulerDao(IDatabase database, IDmarcPeriodicSchedulerConfig config, IClock clock)
         {
-            _connectionInfo = connectionInfo;
+            _database = database;
             _config = config;
+            _clock = clock;
         }
 
         public async Task<List<DmarcSchedulerState>> GetExpiredDmarcRecords()
         {
-            string connectionString = await _connectionInfo.GetConnectionStringAsync();
+            DateTime nowMinusInterval = _clock.GetDateTimeUtc().AddSeconds(- _config.RefreshIntervalSeconds);
 
-            List<DmarcSchedulerState> results = new List<DmarcSchedulerState>();
-
-            using (DbDataReader reader = await MySqlHelper.ExecuteReaderAsync(connectionString,
-                DmarcPeriodicSchedulerDaoResources.SelectDmarcRecordsToSchedule,
-                new MySqlParameter("refreshIntervalSeconds", _config.RefreshIntervalSeconds),
-                new MySqlParameter("limit", _config.DomainBatchSize)))
+            using (var connection = await _database.CreateAndOpenConnectionAsync())
             {
-                while (await reader.ReadAsync())
-                {
-                    results.Add(CreateDmarcSchedulerState(reader));
-                }
-            }
+                var records = (await connection.QueryAsync<string>(
+                    DmarcPeriodicSchedulerDaoResources.SelectDmarcRecordsToSchedule,
+                    new {now_minus_interval = nowMinusInterval, limit = _config.DomainBatchSize})).ToList();
 
-            return results;
+                return records.Select(record => new DmarcSchedulerState(record)).ToList();
+            }
         }
 
         public async Task UpdateLastChecked(List<DmarcSchedulerState> entitiesToUpdate)
         {
-            string query = string.Format(DmarcPeriodicSchedulerDaoResources.UpdateDmarcRecordsLastChecked,
-                string.Join(',', entitiesToUpdate.Select((_, i) => $"@domainName{i}")));
-
-            MySqlParameter[] parameters = entitiesToUpdate
-                .Select((_, i) => new MySqlParameter($"domainName{i}", _.Id.ToLower()))
-                .ToArray();
-
-            string connectionString = await _connectionInfo.GetConnectionStringAsync();
-
-            await MySqlHelper.ExecuteNonQueryAsync(connectionString, query, parameters);
+            using (var connection = await _database.CreateAndOpenConnectionAsync())
+            {
+                var parameters = entitiesToUpdate.Select(ent => new { id = ent.Id, lastChecked = GetAdjustedLastCheckedTime() }).ToArray();
+                await connection.ExecuteAsync(DmarcPeriodicSchedulerDaoResources.UpdateDmarcRecordsLastCheckedDistributed, parameters);
+            }
         }
 
-        private DmarcSchedulerState CreateDmarcSchedulerState(DbDataReader reader)
+        private DateTime GetAdjustedLastCheckedTime()
         {
-            return new DmarcSchedulerState(reader.GetString("id"));
+            return _clock.GetDateTimeUtc().AddSeconds(-(new Random().NextDouble() * 3600));
         }
     }
 }

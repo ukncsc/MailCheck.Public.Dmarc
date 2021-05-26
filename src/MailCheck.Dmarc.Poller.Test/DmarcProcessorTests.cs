@@ -37,9 +37,7 @@ namespace MailCheck.Dmarc.Poller.Test
         public async Task DmarcRecordsReturnedWhenAllGood()
         {
             string domain = "abc.com";
-
-            A.CallTo(() => _config.AllowNullResults).Returns(true);
-
+            
             DmarcRecordInfo dmarcRecordInfo = new DmarcRecordInfo(new List<string> { ExampleDmarcRecord }, domain, true, false);
             List<DmarcRecordInfo> dmarcRecordInfos = new List<DmarcRecordInfo> { dmarcRecordInfo };
             A.CallTo(() => _dnsClient.GetDmarcRecords(domain))
@@ -53,54 +51,16 @@ namespace MailCheck.Dmarc.Poller.Test
 
             Assert.That(result.Records, Is.SameAs(dmarcRecords));
         }
-
-        [Test]
-        public async Task DmarcExceptionThrownWhenAllowNullResultsNotSetAndEmptyResult()
-        {
-            string domain = "abc.com";
-
-            A.CallTo(() => _config.AllowNullResults).Returns(false);
-
-            Assert.ThrowsAsync<DmarcPollerException>(() => _dmarcProcessor.Process(domain));
-        }
+        
 
         [Test]
         public async Task DmarcExceptionNotThrownWhenAllowNullResultsSetAndEmptyResult()
         {
             string domain = "abc.com";
 
-            A.CallTo(() => _config.AllowNullResults).Returns(true);
-
             DmarcPollResult result = await _dmarcProcessor.Process(domain);
 
             Assert.AreEqual(0, result.Records.Records.Count);
-        }
-
-        [Test]
-        public async Task ErrorResultReturnedWhenDnsErrorRetrievingDmarcRecordTest()
-        {
-            string domain = "abc.com";
-
-            A.CallTo(() => _config.AllowNullResults).Returns(true);
-
-            A.CallTo(() => _dnsClient.GetDmarcRecords(A<string>._))
-                .Returns(new DnsResult<List<DmarcRecordInfo>>("error"));
-
-            DmarcPollResult result = await _dmarcProcessor.Process(domain);
-            Assert.That(domain, Is.EqualTo(result.Records.Domain));
-        }
-
-        [Test]
-        public async Task ExceptionThrownWhenDnsErrorRetrievingDmarcRecordAndNotAllowingNullsTest()
-        {
-            string domain = "abc.com";
-
-            A.CallTo(() => _config.AllowNullResults).Returns(false);
-
-            A.CallTo(() => _dnsClient.GetDmarcRecords(A<string>._))
-                .Returns(new DnsResult<List<DmarcRecordInfo>>("error"));
-
-            Assert.ThrowsAsync<DmarcPollerException>(() => _dmarcProcessor.Process(domain));
         }
     }
 }

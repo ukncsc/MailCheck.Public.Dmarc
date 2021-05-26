@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using MailCheck.Common.Contracts.Messaging;
 using MailCheck.Common.Messaging.Abstractions;
 using MailCheck.Common.Messaging.Common.Exception;
 using MailCheck.Dmarc.Contracts.Entity;
 using MailCheck.Dmarc.Contracts.Evaluator;
-using MailCheck.Dmarc.Contracts.External;
 using MailCheck.Dmarc.Contracts.Scheduler;
 using MailCheck.Dmarc.Entity.Config;
 using MailCheck.Dmarc.Entity.Dao;
 using MailCheck.Dmarc.Entity.Entity.Notifiers;
-using Microsoft.Extensions.Logging;
-using System.Linq;
 using MailCheck.Dmarc.Entity.Entity.DomainStatus;
 
 namespace MailCheck.Dmarc.Entity.Entity
@@ -44,21 +43,37 @@ namespace MailCheck.Dmarc.Entity.Entity
 
         public async Task Handle(DomainCreated message)
         {
-            string messageId = message.Id.ToLower();
+            string domain = message.Id.ToLower();
 
-            DmarcEntityState state = await _dao.Get(messageId);
+            DmarcEntityState state = await _dao.Get(domain);
 
             if (state != null)
             {
-                _log.LogError("Ignoring {EventName} as DmarcEntity already exists for {Id}.", nameof(DomainCreated), messageId);
-                throw new MailCheckException($"Cannot handle event {nameof(DomainCreated)} as DmarcEntity already exists for {messageId}.");
+                _log.LogInformation($"Ignoring {nameof(DomainCreated)} as DmarcEntity already exists for {domain}.");
             }
-            
-            state = new DmarcEntityState(messageId, 1, DmarcState.Created, DateTime.UtcNow);
-            await _dao.Save(state);
-            DmarcEntityCreated dmarcEntityCreated = new DmarcEntityCreated(messageId, state.Version);
+            else
+            {
+                state = new DmarcEntityState(domain, 1, DmarcState.Created, DateTime.UtcNow);
+                await _dao.Save(state);
+                _log.LogInformation($"Created DmarcEntity for {domain}.");
+            }
+
+            DmarcEntityCreated dmarcEntityCreated = new DmarcEntityCreated(domain, state.Version);
             _dispatcher.Dispatch(dmarcEntityCreated, _dmarcEntityConfig.SnsTopicArn);
-            _log.LogInformation("Created DmarcEntity for {Id}.", messageId);
+        }
+
+        public async Task Handle(DomainDeleted message)
+        {
+            string domain = message.Id.ToLower();
+            int rows = await _dao.Delete(domain);
+            if (rows == 1)
+            {
+                _log.LogInformation($"Deleted DMARC entity for: {domain}.");
+            }
+            else
+            {
+                _log.LogInformation($"DMARC entity already deleted for: {domain}.");
+            }
         }
 
         public async Task Handle(DmarcRecordExpired message)
@@ -97,26 +112,13 @@ namespace MailCheck.Dmarc.Entity.Entity
 
         }
 
-        public class DomainStatusEvaluation : Message
-        {
-            public string RecordType { get; }
-
-            public Contracts.SharedDomain.MessageType MessageType { get; }
-
-            public DomainStatusEvaluation(string id, string recordType, Contracts.SharedDomain.MessageType messageType) : base(id)
-            {
-                RecordType = recordType;
-                MessageType = messageType;
-            }
-        }
-
         private async Task<DmarcEntityState> LoadState(string id, string messageType)
         {
             DmarcEntityState state = await _dao.Get(id);
 
             if (state == null)
             {
-                _log.LogError("Ignoring {EventName} as DMARC Entity does not exist for {Id}.", messageType, id);
+                _log.LogInformation("Ignoring {EventName} as DMARC Entity does not exist for {Id}.", messageType, id);
                 throw new MailCheckException(
                     $"Cannot handle event {messageType} as DMARC Entity doesnt exists for {id}.");
             }
@@ -124,10 +126,5 @@ namespace MailCheck.Dmarc.Entity.Entity
             return state;
         }
 
-        public async Task Handle(DomainDeleted message)
-        {
-            await _dao.Delete(message.Id);
-            _log.LogInformation($"Deleted DMARC entity with id: {message.Id}.");
-        }
     }
 }

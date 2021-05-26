@@ -7,6 +7,7 @@ using MailCheck.Dmarc.Api.Dao;
 using MailCheck.Dmarc.Api.Domain;
 using MailCheck.Dmarc.Api.Service;
 using MailCheck.Dmarc.Contracts.Entity;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
 namespace MailCheck.Dmarc.Api.Test.Service
@@ -18,6 +19,7 @@ namespace MailCheck.Dmarc.Api.Test.Service
         private IMessagePublisher _messagePublisher;
         private IDmarcApiDao _dao;
         private IDmarcApiConfig _config;
+        private ILogger<DmarcService> _log;
 
         [SetUp]
         public void SetUp()
@@ -25,7 +27,8 @@ namespace MailCheck.Dmarc.Api.Test.Service
             _messagePublisher = A.Fake<IMessagePublisher>();
             _dao = A.Fake<IDmarcApiDao>();
             _config = A.Fake<IDmarcApiConfig>();
-            _dmarcService = new DmarcService(_messagePublisher, _dao, _config);
+            _log = A.Fake<ILogger<DmarcService>>();
+            _dmarcService = new DmarcService(_messagePublisher, _dao, _config, _log);
         }
 
         [Test]

@@ -1,4 +1,5 @@
-﻿using MailCheck.Common.Messaging.Abstractions;
+﻿using MailCheck.Common.Data;
+using MailCheck.Common.Messaging.Abstractions;
 using MailCheck.Dmarc.Scheduler.Config;
 using MailCheck.Dmarc.Scheduler.Dao;
 using MailCheck.Dmarc.Scheduler.Handler;
@@ -15,7 +16,8 @@ namespace MailCheck.Dmarc.Scheduler.StartUp
             services
                 .AddTransient<IDmarcSchedulerConfig, DmarcSchedulerConfig>()
                 .AddTransient<DmarcSchedulerHandler>()
-                .AddTransient<IDmarcSchedulerDao, DmarcSchedulerDao>();
+                .AddTransient<IDmarcSchedulerDao, DmarcSchedulerDao>()
+                .AddSingleton<IDatabase, DefaultDatabase<MySqlProvider>>();
         }
     }
 }

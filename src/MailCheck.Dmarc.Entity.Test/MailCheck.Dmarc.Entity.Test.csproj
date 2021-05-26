@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="FakeItEasy" Version="5.5.0" />
-    <PackageReference Include="MailCheck.Common.TestSupport" Version="4.4.0" />
-    <PackageReference Include="MailCheck.DomainStatus.Contracts" Version="0.0.1.10" />
+    <PackageReference Include="MailCheck.Common.TestSupport" Version="5.1.0" />
+    <PackageReference Include="MailCheck.DomainStatus.Contracts" Version="0.0.2.126" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />

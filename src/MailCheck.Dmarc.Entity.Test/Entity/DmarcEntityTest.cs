@@ -8,7 +8,6 @@ using MailCheck.Common.Messaging.Common.Exception;
 using MailCheck.Dmarc.Contracts;
 using MailCheck.Dmarc.Contracts.Entity;
 using MailCheck.Dmarc.Contracts.Evaluator;
-using MailCheck.Dmarc.Contracts.External;
 using MailCheck.Dmarc.Contracts.Scheduler;
 using MailCheck.Dmarc.Contracts.SharedDomain;
 using MailCheck.Dmarc.Entity.Config;
@@ -19,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using A = FakeItEasy.A;
 using Message = MailCheck.Dmarc.Contracts.SharedDomain.Message;
+using MailCheck.Common.Contracts.Messaging;
 
 namespace MailCheck.Dmarc.Entity.Test.Entity
 {
@@ -58,10 +58,13 @@ namespace MailCheck.Dmarc.Entity.Test.Entity
         }
 
         [Test]
-        public void HandleDomainCreatedThrowsIfEntityAlreadyExistsForDomain()
+        public async Task HandleDomainCreatedDoesNotSave()
         {
             A.CallTo(() => _dmarcEntityDao.Get(Id)).Returns(new DmarcEntityState(Id, 1, DmarcState.PollPending, DateTime.UtcNow));
-            Assert.ThrowsAsync<MailCheckException>(() => _dmarcEntity.Handle(new DomainCreated(Id, "test@test.com", DateTime.Now)));
+            await _dmarcEntity.Handle(new DomainCreated(Id, "test@test.com", DateTime.Now));
+
+            A.CallTo(() => _dmarcEntityDao.Save(A<DmarcEntityState>._)).MustNotHaveHappened();
+            A.CallTo(() => _dispatcher.Dispatch(A<DmarcEntityCreated>._, A<string>._)).MustHaveHappenedOnceExactly();
         }
 
         [Test]

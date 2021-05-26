@@ -69,13 +69,13 @@ namespace MailCheck.Dmarc.Poller.Test.Integration.TagParser
         [TestCase(" dmarc1")]
         [TestCase(" DMARC1")]
         [TestCase(null)]
-        public void VersionWithInvalidValue(string invalidValue)
+        public async Task VersionWithInvalidValue(string invalidValue)
         {
             SetUpTxtRecords($"v={invalidValue}; p=none");
 
-            DmarcPollerException exception = Assert.ThrowsAsync<DmarcPollerException>(() => Handler.Handle(new DmarcPollPending("test.gov.uk")));
+            await Handler.Handle(new DmarcPollPending("test.gov.uk"));
 
-            Assert.AreEqual("DMARC records missing or empty for test.gov.uk.", exception.Message);
+            Assert.AreEqual(0, GetDispatchedMessage().Records.Records.Count);
         }
 
         [Test]

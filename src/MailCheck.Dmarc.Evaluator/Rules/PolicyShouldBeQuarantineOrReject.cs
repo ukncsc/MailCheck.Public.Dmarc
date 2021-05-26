@@ -29,7 +29,7 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
             } else if (policy != null && policy.PolicyType == PolicyType.None)
             {
-                string errorMessage = string.Format(DmarcRulesResource.PolicyShouldBeQuarantineOrRejectErrorMessage, policy.PolicyType);
+                string errorMessage = DmarcRulesResource.PolicyShouldBeQuarantineOrRejectErrorMessage;
                 string markdown = DmarcRulesMarkDownResource.PolicyShouldBeQuarantineOrRejectErrorMessage;
 
                 messages.Add(new Message(Id, MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markdown));

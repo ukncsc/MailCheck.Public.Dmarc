@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using DnsClient;
@@ -26,6 +27,7 @@ namespace MailCheck.Dmarc.Poller.Test.Integration
         [SetUp]
         public void Setup()
         {
+            Environment.SetEnvironmentVariable("ACTIVE_FEATURES","MigrationAdvisories");
             LookupClient = A.Fake<ILookupClient>();
             _messageDispatcher = A.Fake<IMessageDispatcher>();
 

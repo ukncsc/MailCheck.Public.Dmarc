@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FakeItEasy;
-using MailCheck.Dmarc.Contracts.External;
+using MailCheck.Common.Contracts.Messaging;
 using MailCheck.Dmarc.Contracts.History;
 using MailCheck.Dmarc.Contracts.Poller;
 using MailCheck.Dmarc.Contracts.SharedDomain;
