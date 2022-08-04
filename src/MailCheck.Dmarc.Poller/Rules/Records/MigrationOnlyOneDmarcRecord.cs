@@ -16,8 +16,8 @@ namespace MailCheck.Dmarc.Poller.Rules.Records
             if (records.IsTld || records.Records.Count == 1) return Task.FromResult(errors);
 
             errors.Add(records.Records.Count > 1
-                ? new Error(Id, ErrorType.Error, DmarcRulesResource.OnlyOneDmarcRecordErrorMessage, DmarcRulesMarkdownResource.OnlyOneDmarcRecordErrorMessage)
-                : new Error(Id, ErrorType.Error, string.Format(DmarcRulesResource.NoDmarcErrorMessage, records.Domain), string.Format(DmarcRulesMarkdownResource.MigrationNoDmarcErrorMessage, records.Domain)));
+                ? new Error(Id, "mailcheck.dmarc.onlyOneDmarcRecord", ErrorType.Error, DmarcRulesResource.OnlyOneDmarcRecordErrorMessage, DmarcRulesMarkdownResource.OnlyOneDmarcRecordErrorMessage)
+                : new Error(Id, "mailcheck.dmarc.noDmarcRecord", ErrorType.Error, string.Format(DmarcRulesResource.NoDmarcErrorMessage, records.Domain), string.Format(DmarcRulesMarkdownResource.MigrationNoDmarcErrorMessage, records.Domain)));
 
             return Task.FromResult(errors);
         }

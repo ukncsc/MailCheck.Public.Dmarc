@@ -21,7 +21,7 @@ namespace MailCheck.Dmarc.Poller.Test.Mapping
         public void TagErrorsAreMapped(ErrorType sourceErrorType, MessageType expectedMessageType)
         {
             OptionalDefaultTag erroneousTag = new OptionalDefaultTag(string.Empty, false);
-            erroneousTag.AddError(new Error(Guid.Empty, sourceErrorType, "testMessage", "testMarkdown"));
+            erroneousTag.AddError(new Error(Guid.Empty, "mailcheck.dmarc.testName", sourceErrorType, "testMessage", "testMarkdown"));
 
             DmarcRecord dmarcRecord = new DmarcRecord(string.Empty, new List<Tag> { erroneousTag }, string.Empty, string.Empty, false, false);
 

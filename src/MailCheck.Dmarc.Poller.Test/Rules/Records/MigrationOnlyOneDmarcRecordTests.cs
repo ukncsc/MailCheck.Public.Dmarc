@@ -52,6 +52,9 @@ namespace MailCheck.Dmarc.Poller.Test.Rules.Records
 
             Assert.That(errors.Any, Is.EqualTo(true));
             Assert.That(errors.First().Message, Is.EqualTo(string.Format(DmarcRulesResource.NoDmarcErrorMessage, domain)));
+            Assert.That(errors.First().Markdown, Is.EqualTo(string.Format(DmarcRulesMarkdownResource.MigrationNoDmarcErrorMessage, domain)));
+            StringAssert.Contains("_dmarc.abc.gov.uk TXT v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.gov.uk;", errors.First().Markdown);
+            StringAssert.Contains("_dmarc.abc.gov.uk TXT v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;", errors.First().Markdown);
         }
 
         [Test]

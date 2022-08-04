@@ -153,6 +153,9 @@
   <data name="PolicyRejectExplanation" xml:space="preserve">
     <value>Mail servers receiving mail for this domain will report statistics for messages from this domain and will reject messages as spam (message wont reach recipient).</value>
   </data>
+  <data name="PolicyUnknownExplanation" xml:space="preserve">
+    <value>Unknown policy type.</value>
+  </data>
   <data name="ReportFormatAFRFExplanation" xml:space="preserve">
     <value>Forensic reports will be sent in AFRF (Authentication Failure Reporting Format) format.</value>
   </data>

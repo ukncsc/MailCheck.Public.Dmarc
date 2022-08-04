@@ -30,7 +30,7 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
             //ignore null uri schemes as these will already have parsing error.
             if (!(t == null || t.Uris.All(_ => string.IsNullOrWhiteSpace(_.Value)) || t.Uris.Select(_ => _.Value.ToLower()).All(_ => _.StartsWith(Prefix))))
             {
-                errors.Add(new Error(Id, ErrorType.Warning, _errorFormatString, _markdownString));
+                errors.Add(new Error(Id, "mailcheck.dmarc.tagShouldBeMailTo", ErrorType.Warning, _errorFormatString, _markdownString));
             }
 
             return Task.FromResult(errors);

@@ -44,7 +44,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
                         string markDown1 = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage,
                             "max size", sizeToken);
 
-                        maxReportSize.AddError(new Error(Error1Id, ErrorType.Error, maxSizeErrorMessage, markDown1));
+                        maxReportSize.AddError(new Error(Error1Id, "mailcheck.dmarc.invalidMaxSizeValue", ErrorType.Error, maxSizeErrorMessage, markDown1));
                     }
 
                     if (!string.IsNullOrEmpty(unitToken) && unit == Unit.Unknown)
@@ -57,7 +57,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
                         string markDown2 = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, "unit",
                          unitToken);
 
-                        maxReportSize.AddError(new Error(Error2Id, ErrorType.Error, unitErrorMessage, markDown2));
+                        maxReportSize.AddError(new Error(Error2Id, "mailcheck.dmarc.invalidUnitValue", ErrorType.Error, unitErrorMessage, markDown2));
                     }
                     return maxReportSize;
                 }
@@ -69,7 +69,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
             string maxReportSizeErrorMessage = string.Format(DmarcParserResource.InvalidValueErrorMessage, "max report size", value);
             string markDown = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, "max report size", value);
 
-            invalidMaxReportSize.AddError(new Error(Error3Id, ErrorType.Error, maxReportSizeErrorMessage, markDown));
+            invalidMaxReportSize.AddError(new Error(Error3Id, "mailcheck.dmarc.invalidMaxReportSizeValue", ErrorType.Error, maxReportSizeErrorMessage, markDown));
             return invalidMaxReportSize;
         }
     }

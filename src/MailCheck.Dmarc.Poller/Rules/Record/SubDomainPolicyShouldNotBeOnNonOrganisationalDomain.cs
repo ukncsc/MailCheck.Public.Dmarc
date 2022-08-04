@@ -17,7 +17,7 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
 
             if (!record.IsInherited && !string.Equals(record.Domain, record.OrgDomain) && subDomainPolicy != null && !subDomainPolicy.IsImplicit)
             {
-                errors.Add(new Error(Id, ErrorType.Info,
+                errors.Add(new Error(Id, "mailcheck.dmarc.subDomainPolicyShouldNotBeOnNonOrganisationalDomain", ErrorType.Info,
                                             string.Format(DmarcRulesResource.SubDomainIneffectualErrorMessage, record.Domain),
                                             string.Format(DmarcRulesMarkdownResource.SubDomainIneffectualErrorMessage, record.Domain)));
             }

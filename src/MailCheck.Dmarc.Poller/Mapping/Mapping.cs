@@ -117,7 +117,7 @@ namespace MailCheck.Dmarc.Poller.Mapping
 
         private static ContractMessage ToContract(this Error error)
         {
-            return new ContractMessage(error.Id, MessageSources.DmarcPoller, error.ErrorType.ToContract(), error.Message, error.Markdown);
+            return new ContractMessage(error.Id, error.Name, MessageSources.DmarcPoller, error.ErrorType.ToContract(), error.Message, error.Markdown);
         }
 
         private static ContractMessageType ToContract(this ErrorType errorType)

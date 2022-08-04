@@ -19,6 +19,7 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
         }
 
         public abstract Guid Id { get; }
+        public abstract string Name { get; }
 
         public Task<List<Error>> Evaluate(DmarcRecord record)
         {
@@ -27,7 +28,7 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
             T t = record.Tags.OfType<T>().FirstOrDefault();
             if (t != null && t.Uris.Count > 2)
             {
-                errors.Add(new Error(Id, ErrorType.Error, string.Format(_moreThan2UrisErrorFormatString, t.Uris.Count), string.Format(_moreThan2UrisMarkDownFormatString, t.Uris.Count)));
+                errors.Add(new Error(Id, Name, ErrorType.Error, string.Format(_moreThan2UrisErrorFormatString, t.Uris.Count), string.Format(_moreThan2UrisMarkDownFormatString, t.Uris.Count)));
             }
 
             return Task.FromResult(errors);

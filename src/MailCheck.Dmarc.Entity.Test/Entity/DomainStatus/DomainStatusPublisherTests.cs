@@ -59,7 +59,7 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.DomainStatus
 
         private Message CreateMessage()
         {
-            return new Message(Guid.Empty, "", MessageType.error, "", "");
+            return new Message(Guid.Empty, "mailcheck.dmarc.testName", "", MessageType.error, "", "");
         }
     }
 }

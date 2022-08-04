@@ -14,7 +14,7 @@ using MailCheck.Dmarc.Entity.Entity.DomainStatus;
 
 namespace MailCheck.Dmarc.Entity.Entity
 {
-    public class DmarcEntity:
+    public class DmarcEntity :
         IHandle<DomainCreated>,
         IHandle<DmarcRecordExpired>,
         IHandle<DmarcRecordsEvaluated>,
@@ -103,7 +103,7 @@ namespace MailCheck.Dmarc.Entity.Entity
 
             Message evnt = state.UpdateDmarcEvaluation(message.Records,
                 message.ElapsedQueryTime, message.Messages, message.Timestamp);
-           
+
             state.Version++;
 
             await _dao.Save(state);

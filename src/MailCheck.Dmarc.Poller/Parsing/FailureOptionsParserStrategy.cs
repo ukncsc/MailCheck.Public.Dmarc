@@ -50,7 +50,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
             {
                 string errorMessage = string.Format(DmarcParserResource.InvalidValueErrorMessage, Tag, value);
                 string markDown = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, Tag, value);
-                failureOption.AddError(new Error(Id, ErrorType.Error, errorMessage, markDown));
+                failureOption.AddError(new Error(Id, "mailcheck.dmarc.invalidFailureOptionValue", ErrorType.Error, errorMessage, markDown));
             }
 
             return failureOption;

@@ -4,15 +4,17 @@ namespace MailCheck.Dmarc.Poller.Domain
 {
     public class Error
     {
-        public Error(Guid id, ErrorType errorType, string message, string markdown)
+        public Error(Guid id, string name, ErrorType errorType, string message, string markdown)
         {
             Id = id;
+            Name = name;
             ErrorType = errorType;
             Message = message;
             Markdown = markdown;
         }
 
         public Guid Id { get; }
+        public string Name { get; }
         public ErrorType ErrorType { get; }
 
         public string Message { get; }
@@ -20,7 +22,7 @@ namespace MailCheck.Dmarc.Poller.Domain
 
         public override string ToString()
         {
-            return $"{nameof(Id)}: {Id}, {nameof(ErrorType)}: {ErrorType}, {nameof(Message)}: {Message}";
+            return $"{nameof(Name)}: {Name}, {nameof(Id)}: {Id}, {nameof(ErrorType)}: {ErrorType}, {nameof(Message)}: {Message}";
         }
     }
 }

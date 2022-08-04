@@ -155,17 +155,17 @@ This tells anyone receiving email from you that:
 
 **Step 2: Create a DMARC record.** Publish this text (TXT) record to the DNS zone for {0}, ensuring you replace **INSERT_TOKEN_HERE** with the token you obtain from the previous steps:
 
-`_dmarc.{0} TXT v=DMARC1;p=none;rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`
+`_dmarc.{0} TXT v=DMARC1; p=none; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`
 
 -------
         
 ### If you manage your domains in MyNCSC
 
-**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC](https://hub.service.ncsc.gov.uk/)
+**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC](https://my.ncsc.gov.uk/)
             
 **Step 2: Create your DMARC record.** Publish this text (TXT) record to the DNS zone for {0}:
             
-`_dmarc.{0} TXT v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk;`</value>
+`_dmarc.{0} TXT v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.gov.uk;`</value>
   </data>
   <data name="OnlyOneDmarcRecordErrorMessage" xml:space="preserve">
     <value>It looks like there are multiple DMARC records for this domain, this isn't valid as there can only be one.

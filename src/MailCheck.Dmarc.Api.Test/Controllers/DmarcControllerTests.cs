@@ -47,12 +47,12 @@ namespace MailCheck.Dmarc.Api.Test.Controllers
         public async Task ItShouldReturnNotFoundWhenThereIsNoDmarcState()
         {
             A.CallTo(() => _authorisationService.IsAuthorised(A<Role>._))
-                .Returns(true);
+                .Returns(new AuthorisationResult { });
 
             A.CallTo(() => _dmarcService.GetDmarcForDomain(A<string>._))
                 .Returns(Task.FromResult<DmarcInfoResponse>(null));
 
-            IActionResult response = await _sut.GetDmarc(new DmarcDomainRequest {Domain = "ncsc.gov.uk"});
+            IActionResult response = await _sut.GetDmarc(new DmarcDomainRequest { Domain = "ncsc.gov.uk" });
 
             Assert.That(response, Is.TypeOf(typeof(NotFoundObjectResult)));
         }
@@ -61,7 +61,7 @@ namespace MailCheck.Dmarc.Api.Test.Controllers
         public async Task ItShouldReturnTheFirstResultWhenTheDmarcStateExists()
         {
             A.CallTo(() => _authorisationService.IsAuthorised(A<Role>._))
-                .Returns(true);
+                .Returns(new AuthorisationResult {Authorised = true});
 
             DmarcInfoResponse state = new DmarcInfoResponse("ncsc.gov.uk", DmarcState.Created);
 
@@ -77,7 +77,7 @@ namespace MailCheck.Dmarc.Api.Test.Controllers
         public async Task RecheckDmarcForRecordOlderThan5MinutesShouldPublishRecheck()
         {
             A.CallTo(() => _authorisationService.IsAuthorised(A<Role>._))
-                .Returns(true);
+                .Returns(new AuthorisationResult { Authorised = true });
 
             DmarcInfoResponse state = new DmarcInfoResponse("ncsc.gov.uk", DmarcState.Created);
 
@@ -95,7 +95,7 @@ namespace MailCheck.Dmarc.Api.Test.Controllers
             A.CallTo(() => _config.RecheckMinPeriodInSeconds).Returns(300);
 
             A.CallTo(() => _authorisationService.IsAuthorised(A<Role>._))
-                .Returns(true);
+                .Returns(new AuthorisationResult { Authorised = true });
 
             DmarcInfoResponse state = new DmarcInfoResponse("ncsc.gov.uk", DmarcState.Created, null, null, DateTime.Now);
 

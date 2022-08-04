@@ -16,7 +16,7 @@ namespace MailCheck.Dmarc.Evaluator.Explainers
                 case PolicyType.Reject:
                     return DmarcExplainerResource.PolicyRejectExplanation;
                 default:
-                    throw new ArgumentException($"Unexpected {nameof(PolicyType)}: {tConcrete.PolicyType}");
+                    return DmarcExplainerResource.PolicyUnknownExplanation;
             }
         }
     }

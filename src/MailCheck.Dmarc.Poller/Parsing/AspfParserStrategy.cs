@@ -22,7 +22,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
             {
                 string errorMessage = string.Format(DmarcParserResource.InvalidValueErrorMessage, Tag, value);
                 string markdown = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, Tag, value);
-                aspf.AddError(new Error(Id, ErrorType.Error, errorMessage, markdown));
+                aspf.AddError(new Error(Id, "mailcheck.dmarc.invalidAspfValue", ErrorType.Error, errorMessage, markdown));
             }
 
             return aspf;

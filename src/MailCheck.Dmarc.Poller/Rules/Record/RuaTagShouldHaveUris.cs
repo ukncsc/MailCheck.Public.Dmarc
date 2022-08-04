@@ -27,7 +27,7 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
             //ignore null uri schemes as these will already have parsing error.
             if(t != null && !t.Uris.Any())
             {
-                errors.Add(new Error(Id, ErrorType.Warning, _zeroUrisErrorMessage, _zeroUrisMarkdownMessage));
+                errors.Add(new Error(Id, "mailcheck.dmarc.ruaTagShouldHaveUris", ErrorType.Warning, _zeroUrisErrorMessage, _zeroUrisMarkdownMessage));
             }
 
             return Task.FromResult(errors);

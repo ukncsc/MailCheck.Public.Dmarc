@@ -57,7 +57,7 @@ namespace MailCheck.Dmarc.Poller.Test.Parsers
         public void MatchingStrategyWithExtraTokensErrorNotAddedIfExistingError()
         {
             Percent percent = new Percent("pct=100=100", null);
-            percent.AddError(new Error(Guid.Empty, ErrorType.Error, "Error parsing tag", string.Empty));
+            percent.AddError(new Error(Guid.Empty, "mailcheck.dmarc.testName", ErrorType.Error, "Error parsing tag", string.Empty));
             A.CallTo(() => _strategy.Parse("pct=100=100", "100=100")).Returns(percent);
             A.CallTo(() => _strategy.MaxOccurences).Returns(1);
 

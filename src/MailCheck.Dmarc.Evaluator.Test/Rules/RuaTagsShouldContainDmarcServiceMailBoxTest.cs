@@ -282,7 +282,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             var testDmarcRecord = CreateDmarcRecord("",
                 CreateReportUriAggregate(new Uri("mailto:a@b.com")));
 
-            await Test(testDmarcRecord, true, MessageType.warning);
+            await Test(testDmarcRecord, true, MessageType.info);
         }
 
 
@@ -298,7 +298,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [Test]
@@ -313,7 +313,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [TestCase("v=DMARC1;p=quarantine")]
@@ -330,7 +330,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=quarantine; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [TestCase("v=DMARC1;p=reject;adkim=s;aspf=s;fo=1;rua=mailto:rua@service.gov.uk;ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;")]
@@ -345,7 +345,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:`**`INSERT_TOKEN_HERE`**`@dmarc-rua.mailcheck.service.ncsc.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;`";
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [Test]
@@ -391,7 +391,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
         {
             var testDmarc = CreateDmarcRecord(CreateReportUriAggregate());
 
-            await Test(testDmarc, true, MessageType.warning);
+            await Test(testDmarc, true, MessageType.info);
         }
 
         [Test]

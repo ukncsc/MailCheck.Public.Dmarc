@@ -18,7 +18,8 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
             List<Error> errors = new List<Error>();
             if (recordLength > MaxRecordLength)
             {
-                errors.Add(new Error(Id, ErrorType.Error,
+                errors.Add(new Error(Id, "mailcheck.dmarc.maxLengthOf450Characters",
+                    ErrorType.Error,
                     string.Format(DmarcRulesResource.MaxLengthOf450CharactersErrorMessage, MaxRecordLength,
                         recordLength),
                     string.Empty));

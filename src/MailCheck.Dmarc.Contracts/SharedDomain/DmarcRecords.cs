@@ -24,7 +24,7 @@ namespace MailCheck.Dmarc.Contracts.SharedDomain
         public string Domain { get; }
         public int MessageSize { get; }
         public List<DmarcRecord> Records { get; }
-        public List<Message> Messages { get; }
+        public List<Message> Messages { get; set; }
 
         public bool Equals(DmarcRecords other)
         {

@@ -43,7 +43,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
                 string unexpectedValuesErrorMessage = string.Format(DmarcParserResource.UnexpectedValueErrorMessage, unexpectedValues, "uri", unexpectedValues);
                 string markDown = string.Format(DmarcParserMarkdownResource.UnexpectedValueErrorMessage, unexpectedValues, "uri", unexpectedValues);
 
-                uriTag.AddError(new Error(Id, ErrorType.Error, unexpectedValuesErrorMessage, markDown));
+                uriTag.AddError(new Error(Id, "mailcheck.dmarc.unexpectedUriValue", ErrorType.Error, unexpectedValuesErrorMessage, markDown));
             }
 
             return uriTag;

@@ -16,7 +16,7 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
 
             if (!record.Tags.OfType<Policy>().Any())
             {
-                errors.Add(new Error(Id, ErrorType.Error, DmarcRulesResource.PolicyTagMustExistErrorMessage, DmarcRulesMarkdownResource.PolicyTagMustExistErrorMessage));
+                errors.Add(new Error(Id, "mailcheck.dmarc.policyTagMustExist", ErrorType.Error, DmarcRulesResource.PolicyTagMustExistErrorMessage, DmarcRulesMarkdownResource.PolicyTagMustExistErrorMessage));
             }
 
             return Task.FromResult(errors);

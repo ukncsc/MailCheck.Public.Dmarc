@@ -53,14 +53,14 @@ namespace MailCheck.Dmarc.Poller.Parsing
                 {
                     string message = string.Format(DmarcParserResource.TagShouldOccurNoMoreThanErrorMessage, strategy.Tag, GetOccurrences(strategy.MaxOccurences), tagOccurences + 1);
                     string markdown = string.Format(DmarcParserMarkdownResource.TagShouldOccurNoMoreThanErrorMessage, strategy.Tag, GetOccurrences(strategy.MaxOccurences), tagOccurences + 1);
-                    tag.AddError(new Error(Guid.Parse("DA770F12-AFFD-4A64-A08C-C7747F915F63"), ErrorType.Error, message, markdown));
+                    tag.AddError(new Error(Guid.Parse("DA770F12-AFFD-4A64-A08C-C7747F915F63"), "mailcheck.dmarc.tagShouldOccurNoMoreThanX", ErrorType.Error, message, markdown));
                 }
 
                 if (tag.AllValid && tagValue.Contains(Separator))
                 {
                     string message = string.Format(DmarcParserResource.UnexpectedValueErrorMessage, tagValue, "term", stringTag);
                     string markdown = string.Format(DmarcParserMarkdownResource.UnexpectedValueErrorMessage, tagValue, "term", stringTag);
-                    tag.AddError(new Error(Guid.Parse("96C64B4A-E857-45F0-A8D4-F2F502FDBA85"), ErrorType.Error, message, markdown));
+                    tag.AddError(new Error(Guid.Parse("96C64B4A-E857-45F0-A8D4-F2F502FDBA85"), "mailcheck.dmarc.unexpectedTagValue", ErrorType.Error, message, markdown));
                 }
 
                 tags.Add(tag);
@@ -76,7 +76,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
         {
             UnknownTag unknownTag = new UnknownTag(tag, value);
             string message = string.Format(DmarcParserResource.UnknownTagErrorMessage, tag ?? "<null>", value ?? "<null>");
-            unknownTag.AddError(new Error(Guid.Parse("D9DB4907-15B3-41FB-8929-2CFBF82DF71F"), ErrorType.Error, message, string.Empty));
+            unknownTag.AddError(new Error(Guid.Parse("D9DB4907-15B3-41FB-8929-2CFBF82DF71F"), "mailcheck.dmarc.unknownTag", ErrorType.Error, message, string.Empty));
             return unknownTag;
         }
 

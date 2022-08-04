@@ -78,6 +78,20 @@ namespace MailCheck.Dmarc.Api.Controllers
             return new ObjectResult(response);
         }
 
+        [HttpGet("{domain}/policy")]
+        [MailCheckAuthoriseResource(Operation.Read, ResourceType.Dmarc, "domain")]
+        public async Task<ActionResult<PolicyResponse>> GetDmarcPolicy(string domain)
+        {
+            PolicyResponse response = await _dmarcService.GetDmarcPolicyForDomain(domain);
+
+            if (response == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return response;
+        }
+
         [HttpPost]
         [Route("domains")]
         [MailCheckAuthoriseRole(Role.Standard)]

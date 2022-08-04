@@ -22,17 +22,17 @@ namespace MailCheck.Dmarc.Evaluator.Rules
             //Dont error on unknown because there will already be a parser error for this
             if (record.IsInherited && subPolicy != null && subPolicy.PolicyType == PolicyType.None)
             {
-                string errorMessage = string.Format(DmarcRulesResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage, policy.PolicyType);
+                string errorMessage = string.Format(DmarcRulesResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage, subPolicy.PolicyType);
                 string markdown = DmarcRulesMarkDownResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage;
                 
-                messages.Add(new Message(Id, MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markdown));
+                messages.Add(new Message(Id, "mailcheck.dmarc.subdomainPolicyMustBeQuarantineOrReject", MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markdown));
 
             } else if (policy != null && policy.PolicyType == PolicyType.None)
             {
                 string errorMessage = DmarcRulesResource.PolicyShouldBeQuarantineOrRejectErrorMessage;
                 string markdown = DmarcRulesMarkDownResource.PolicyShouldBeQuarantineOrRejectErrorMessage;
 
-                messages.Add(new Message(Id, MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markdown));
+                messages.Add(new Message(Id, "mailcheck.dmarc.policyShouldBeQuarantineOrReject", MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markdown));
             }
 
             return Task.FromResult(messages);

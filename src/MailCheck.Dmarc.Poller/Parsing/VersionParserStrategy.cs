@@ -19,7 +19,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
                 string errorMessage = string.Format(DmarcParserResource.InvalidValueErrorMessage, Tag, value);
                 string markdown = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, Tag, value);
 
-                version.AddError(new Error(Id, ErrorType.Error, errorMessage, markdown));
+                version.AddError(new Error(Id, "mailcheck.dmarc.invalidVersionValue", ErrorType.Error, errorMessage, markdown));
             }
             return version;
         }

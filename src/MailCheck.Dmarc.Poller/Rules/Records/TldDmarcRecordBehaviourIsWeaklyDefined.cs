@@ -16,7 +16,9 @@ namespace MailCheck.Dmarc.Poller.Rules.Records
 
             if (records.Records.Any() && records.IsTld)
             {
-                errors.Add(new Error(Id, ErrorType.Warning,
+                errors.Add(new Error(Id,
+                    "mailcheck.dmarc.tlsDmarcWeaklyDefined",
+                    ErrorType.Warning,
                     string.Format(DmarcRulesResource.TldDmarcWeaklyDefinedMessage, records.Domain),
                     string.Format(DmarcRulesMarkdownResource.TldDmarcWeaklyDefinedMessage, records.Domain)));
             }

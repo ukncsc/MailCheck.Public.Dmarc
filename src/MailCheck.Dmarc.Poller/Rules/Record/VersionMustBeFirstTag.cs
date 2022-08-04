@@ -19,7 +19,7 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
 
             if (!(firstTag is Version))
             {
-                errors.Add(new Error(Id, ErrorType.Error,
+                errors.Add(new Error(Id, "mailcheck.dmarc.versionMustBeFirstTag", ErrorType.Error,
                     string.Format(DmarcRulesResource.VersionMustBeFirstTagErrorMessage, firstTag?.Value ?? "null"),
                     string.Format(DmarcRulesMarkdownResource.VersionMustBeFirstTagErrorMessage, firstTag?.Value ?? "null")));
             }

@@ -6,6 +6,7 @@ using MailCheck.Common.Data.Implementations;
 using MailCheck.Common.Environment.Abstractions;
 using MailCheck.Common.Environment.Implementations;
 using MailCheck.Common.Messaging.Abstractions;
+using MailCheck.Common.Processors.Notifiers;
 using MailCheck.Common.SSM;
 using MailCheck.Dmarc.Contracts.SharedDomain.Serialization;
 using MailCheck.Dmarc.Entity.Config;
@@ -17,6 +18,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using FindingsChangedNotifier = MailCheck.Common.Processors.Notifiers.FindingsChangedNotifier;
+using LocalFindingsChangedNotifier = MailCheck.Dmarc.Entity.Entity.Notifiers.FindingsChangedNotifier;
+using MessageEqualityComparer = MailCheck.Dmarc.Entity.Entity.Notifiers.MessageEqualityComparer;
 
 namespace MailCheck.Dmarc.Entity.StartUp
 {
@@ -49,6 +53,8 @@ namespace MailCheck.Dmarc.Entity.StartUp
                 .AddTransient<IChangeNotifiersComposite, ChangeNotifiersComposite>()
                 .AddTransient<IChangeNotifier, RecordChangedNotifier>()
                 .AddTransient<IChangeNotifier, AdvisoryChangedNotifier>()
+                .AddTransient<IChangeNotifier, LocalFindingsChangedNotifier>()
+                .AddTransient<IFindingsChangedNotifier, FindingsChangedNotifier>()
                 .AddTransient<IEqualityComparer<Contracts.SharedDomain.Message>, MessageEqualityComparer>()
                 .AddTransient<IDomainStatusPublisher, DomainStatusPublisher>()
                 .AddTransient<IDomainStatusEvaluator, DomainStatusEvaluator>()

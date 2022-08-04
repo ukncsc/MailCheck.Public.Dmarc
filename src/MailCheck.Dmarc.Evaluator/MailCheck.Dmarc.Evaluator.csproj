@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AWSProjectType>Lambda</AWSProjectType>
     <ApplicationIcon />
@@ -10,26 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Amazon.Lambda.Core" Version="1.2.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.8.0" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.0.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="2.0.0" />
     <PackageReference Include="Flurl.Http" Version="2.4.2" />
-    <PackageReference Include="MailCheck.Common.Messaging" Version="5.1.0" />
-    <PackageReference Include="MailCheck.Common.Api" Version="5.1.0" />
-    <PackageReference Include="MailCheck.Common.Util" Version="5.1.0" />
-    <PackageReference Include="MailCheck.Common.SSM" Version="5.1.0" />
-    <PackageReference Include="MailCheck.Common.Environment" Version="5.1.0" />
+    <PackageReference Include="MailCheck.Common.Messaging" Version="12.0.0" />
+    <PackageReference Include="MailCheck.Common.Api" Version="12.0.0" />
+    <PackageReference Include="MailCheck.Common.Util" Version="12.0.0" />
+    <PackageReference Include="MailCheck.Common.SSM" Version="12.0.0" />
+    <PackageReference Include="MailCheck.Common.Environment" Version="12.0.0" />
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MailCheck.Aggregate.Client\MailCheck.AggregateReport.Client.csproj" />
-    <ProjectReference Include="..\MailCheck.Dkim.Client\MailCheck.Dkim.Client.csproj" />
     <ProjectReference Include="..\MailCheck.Dmarc.Contracts\MailCheck.Dmarc.Contracts.csproj" />
-    <ProjectReference Include="..\MailCheck.Spf.Client\MailCheck.Spf.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +36,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DmarcRulesResource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Explainers\DmarcExplainerResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DmarcExplainerResource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +51,10 @@
     <EmbeddedResource Update="Rules\DmarcRulesResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DmarcRulesResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Explainers\DmarcExplainerResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DmarcExplainerResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

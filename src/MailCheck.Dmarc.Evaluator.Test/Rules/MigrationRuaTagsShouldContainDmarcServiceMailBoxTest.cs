@@ -54,7 +54,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
 
@@ -83,7 +83,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
 
@@ -112,7 +112,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk; sp=none; fo=0:1:d:s;`";
 
@@ -140,7 +140,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
@@ -170,7 +170,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
@@ -200,7 +200,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
@@ -229,7 +229,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
@@ -258,7 +258,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
@@ -289,7 +289,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
@@ -320,7 +320,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=none; rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk,mailto:4fvdev87@ag.dmarcian-eu.com,mailto:0007756a@mxtoolbox.dmarc-report.com; sp=none; fo=0:1:d:s;`";
 
@@ -373,7 +373,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
             var testDmarcRecord = CreateDmarcRecord("",
                 CreateReportUriAggregate(new Uri("mailto:a@b.com")));
 
-            await Test(testDmarcRecord, true, MessageType.warning);
+            await Test(testDmarcRecord, true, MessageType.info);
         }
 
 
@@ -392,13 +392,13 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:dmarc-rua@dmarc.service.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk; `";
 
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [Test]
@@ -416,13 +416,13 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk; rua=mailto:dmarc-rua@dmarc.service.gov.uk;`";
 
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [TestCase("v=DMARC1;p=quarantine")]
@@ -442,13 +442,13 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=quarantine; rua=mailto:dmarc-rua@dmarc.service.gov.uk;`";
 
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [TestCase("v=DMARC1;p=reject;adkim=s;aspf=s;fo=1;rua=mailto:rua@service.gov.uk;ruf=mailto:dmarc-ruf@dmarc.service.gov.uk;")]
@@ -466,13 +466,13 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
                 + $"{Environment.NewLine}{Environment.NewLine}------"
                 + $"{Environment.NewLine}{Environment.NewLine}### If you manage your domains in MyNCSC"
                 + $"{Environment.NewLine}{Environment.NewLine}Reports of email received should be sent to the NCSC Mail Check service `(rua=mailto:dmarc-rua@dmarc.service.ncsc.gov.uk)`"
-                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://hub.service.ncsc.gov.uk/)"
+                + $"{Environment.NewLine}{Environment.NewLine}**Step 1: Ensure domain is verified in MyNCSC.** Ensure this domain is added and verified in the [asset area of MyNCSC.](https://my.ncsc.gov.uk/)"
                 + $"{Environment.NewLine}{Environment.NewLine}**Step 2: Alter your DMARC record.** If you would like Mail Check to receive a copy of your reports, then please change your record to the following:"
                 + $"{Environment.NewLine}{Environment.NewLine}`v=DMARC1; p=reject; adkim=s; aspf=s; fo=1; rua=mailto:dmarc-rua@dmarc.service.gov.uk,mailto:rua@service.gov.uk; ruf=mailto:dmarc-ruf@dmarc.service.gov.uk; `";
 
             var testDmarcRecord = CreateDmarcRecord(record);
 
-            await Test(testDmarcRecord, true, MessageType.warning, markDown);
+            await Test(testDmarcRecord, true, MessageType.info, markDown);
         }
 
         [Test]
@@ -518,7 +518,7 @@ namespace MailCheck.Dmarc.Evaluator.Test.Rules
         {
             var testDmarc = CreateDmarcRecord(CreateReportUriAggregate());
 
-            await Test(testDmarc, true, MessageType.warning);
+            await Test(testDmarc, true, MessageType.info);
         }
 
         [Test]

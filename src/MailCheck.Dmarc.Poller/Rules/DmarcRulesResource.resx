@@ -121,7 +121,7 @@
     <value>Record length should be less than or equal to {0} characters. This record has {1} characters.</value>
   </data>
   <data name="NoDmarcErrorMessage" xml:space="preserve">
-    <value>No DMARC record configured.</value>
+    <value>No DMARC record. Domain can be used to send malicious spoofed emails.</value>
   </data>
   <data name="OnlyOneDmarcRecordErrorMessage" xml:space="preserve">
     <value>A domain should have only 1 DMARC record.</value>

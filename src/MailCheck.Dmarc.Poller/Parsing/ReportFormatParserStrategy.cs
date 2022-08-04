@@ -23,7 +23,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
                 string errorMessage = string.Format(DmarcParserResource.InvalidValueErrorMessage, Tag, value);
                 string markDown = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, Tag, value);
 
-                reportFormat.AddError(new Error(Id, ErrorType.Error, errorMessage, markDown));
+                reportFormat.AddError(new Error(Id, "mailcheck.dmarc.invalidReportFormatValue", ErrorType.Error, errorMessage, markDown));
             }
 
             return reportFormat;

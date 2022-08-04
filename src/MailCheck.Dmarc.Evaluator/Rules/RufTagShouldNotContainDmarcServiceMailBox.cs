@@ -31,7 +31,13 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
                 if (reportUris.Any(_ => _.Authority == _dmarcMailbox.Authority))
                 {
-                    messages.Add(new Message(Guid.Parse("019e94a9-143c-4041-8bc5-98a0339cf674"), MessageSources.DmarcEvaluator, MessageType.info, DmarcRulesResource.RufTagShouldNotContainDmarcServiceMailBoxErrorMessage, null));
+                    messages.Add(new Message(Guid.Parse("019e94a9-143c-4041-8bc5-98a0339cf674"),
+                        "mailcheck.dmarc.rufTagShouldNotContainDmarcServiceMailBox",
+                        MessageSources.DmarcEvaluator,
+                        MessageType.info,
+                        DmarcRulesResource.RufTagShouldNotContainDmarcServiceMailBoxErrorMessage,
+                        null)
+                    );
                 }
             }
 

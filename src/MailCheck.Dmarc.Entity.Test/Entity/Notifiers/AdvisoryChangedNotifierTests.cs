@@ -41,8 +41,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         {
             Guid id = Guid.NewGuid();
 
-            Message existingMessage = new Message(id, "testSource", Contracts.SharedDomain.MessageType.warning, "testText1", string.Empty);
-            Message newMessage = new Message(id, "testSource text has changed!", Contracts.SharedDomain.MessageType.error, "testText2", string.Empty);
+            Message existingMessage = new Message(id, "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.warning, "testText1", string.Empty);
+            Message newMessage = new Message(id, "mailcheck.dmarc.testName", "testSource text has changed!", Contracts.SharedDomain.MessageType.error, "testText2", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage), CreateDmarcRecordsEvaluatedWithMessages(newMessage));
 
@@ -57,8 +57,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         {
             Guid messageId = Guid.NewGuid();
 
-            Message existingMessage = new Message(messageId, "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
-            Message newMessage = new Message(messageId, "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message existingMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message newMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage), CreateDmarcRecordsEvaluatedWithMessages(newMessage));
 
@@ -71,8 +71,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         [Test]
         public void RaisesAddedAndRemovedWhenNewMessageTypeChanged()
         {
-            Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
-            Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.error, "testText", string.Empty);
+            Message existingMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message newMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.error, "testText", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage), CreateDmarcRecordsEvaluatedWithMessages(newMessage));
 
@@ -87,8 +87,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         [Test]
         public void RaisesAddedAndRemovedWhenNewMessageTextChanged()
         {
-            Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
-            Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
+            Message existingMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message newMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage), CreateDmarcRecordsEvaluatedWithMessages(newMessage));
 
@@ -103,8 +103,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         [Test]
         public void RaisesAddedAndRemovedWhenNewMessagesAdded()
         {
-            Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
-            Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "newTestText", string.Empty);
+            Message existingMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message newMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "newTestText", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage), CreateDmarcRecordsEvaluatedWithMessages(newMessage));
 
@@ -121,10 +121,10 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         {
             Guid messageId = Guid.NewGuid();
 
-            Message existingMessage = new Message(messageId, "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message existingMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
 
-            Message newMessage1 = new Message(messageId, "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
-            Message newMessage2 = new Message(Guid.NewGuid(), "testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
+            Message newMessage1 = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message newMessage2 = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage), CreateDmarcRecordsEvaluatedWithMessages(newMessage1, newMessage2));
 
@@ -141,10 +141,10 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         {
             Guid messageId = Guid.NewGuid();
 
-            Message existingMessage1 = new Message(messageId, "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
-            Message existingMessage2 = new Message(Guid.NewGuid(), "testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
+            Message existingMessage1 = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message existingMessage2 = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
 
-            Message newMessage = new Message(messageId, "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message newMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithMessages(existingMessage1, existingMessage2), CreateDmarcRecordsEvaluatedWithMessages(newMessage));
 
@@ -161,8 +161,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         {
             Guid messageId = Guid.NewGuid();
 
-            Message existingMessage = new Message(messageId, "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
-            Message newMessage = new Message(messageId, "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message existingMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message newMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithRecords(existingMessage), CreateDmarcRecordsEvaluatedWithRecords(newMessage));
 
@@ -175,8 +175,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         [Test]
         public void RaisesAdvisoryAddedWhenMessageTypeChanges()
         {
-            Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
-            Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.error, "testText", string.Empty);
+            Message existingMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message newMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.error, "testText", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithRecords(existingMessage), CreateDmarcRecordsEvaluatedWithRecords(newMessage));
 
@@ -190,8 +190,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         [Test]
         public void RaisesAdvisoryAddedAndAdivosryRemovedWhenMessageReplaced()
         {
-            Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
-            Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
+            Message existingMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message newMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithRecords(existingMessage), CreateDmarcRecordsEvaluatedWithRecords(newMessage));
 
@@ -205,8 +205,8 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         [Test]
         public void RaisesAdvisoryAddedWhenMessageDisplayTypeChanges()
         {
-            Message existingMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty, Contracts.SharedDomain.MessageDisplay.Prompt);
-            Message newMessage = new Message(Guid.NewGuid(), "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
+            Message existingMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty, Contracts.SharedDomain.MessageDisplay.Prompt);
+            Message newMessage = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource", Contracts.SharedDomain.MessageType.info, "testText", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithRecords(existingMessage), CreateDmarcRecordsEvaluatedWithRecords(newMessage));
 
@@ -221,10 +221,10 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         {
             Guid messageId = Guid.NewGuid();
 
-            Message existingMessage = new Message(messageId,"testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message existingMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
 
-            Message newMessage1 = new Message(messageId,"testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
-            Message newMessage2 = new Message(Guid.NewGuid(),"testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
+            Message newMessage1 = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message newMessage2 = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithRecords(existingMessage), CreateDmarcRecordsEvaluatedWithRecords(newMessage1, newMessage2));
 
@@ -239,10 +239,10 @@ namespace MailCheck.Dmarc.Entity.Test.Entity.Notifiers
         {
             Guid messageId = Guid.NewGuid();
 
-            Message existingMessage1 = new Message(messageId,"testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
-            Message existingMessage2 = new Message(Guid.NewGuid(),"testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
+            Message existingMessage1 = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message existingMessage2 = new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", "testSource2", Contracts.SharedDomain.MessageType.info, "testText2", string.Empty);
 
-            Message newMessage = new Message(messageId,"testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
+            Message newMessage = new Message(messageId, "mailcheck.dmarc.testName", "testSource1", Contracts.SharedDomain.MessageType.info, "testText1", string.Empty);
 
             _advisoryChangedNotifier.Handle(CreateEntityStateWithRecords(existingMessage1, existingMessage2), CreateDmarcRecordsEvaluatedWithRecords(newMessage));
 

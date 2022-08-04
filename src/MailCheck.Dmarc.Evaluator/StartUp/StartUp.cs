@@ -1,19 +1,16 @@
 ﻿using Amazon.SimpleNotificationService;
 using Amazon.SimpleSystemsManagement;
-using MailCheck.AggregateReport.Client;
 using MailCheck.Common.Logging;
 using MailCheck.Common.Messaging.Abstractions;
 using MailCheck.Common.SSM;
 using MailCheck.Common.Util;
 using MailCheck.Common.Environment.FeatureManagement;
-using MailCheck.Dkim.Client;
 using MailCheck.Dmarc.Contracts.Poller;
 using MailCheck.Dmarc.Contracts.SharedDomain;
 using MailCheck.Dmarc.Contracts.SharedDomain.Serialization;
 using MailCheck.Dmarc.Evaluator.Config;
 using MailCheck.Dmarc.Evaluator.Explainers;
 using MailCheck.Dmarc.Evaluator.Rules;
-using MailCheck.Spf.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -59,17 +56,12 @@ namespace MailCheck.Dmarc.Evaluator.StartUp
                 .AddTransient<IEvaluator<DmarcRecord>, Evaluator<DmarcRecord>>()
                 .AddTransient<IRule<DmarcRecord>, PctValueShouldBe100>()
                 .AddTransient<IRule<DmarcRecord>, PolicyShouldBeQuarantineOrReject>()
-                .AddTransient<IRule<DmarcRecord>, NudgeAlongFromPolicyOfNone>()
                 .AddTransient<IRule<DmarcRecord>, RufTagShouldNotContainDmarcServiceMailBox>()
-                .AddTransient<IRule<DmarcRecord>, ShouldHaveSpfRecordWIthPolicyOfQuarantineOrReject>()
                 .AddTransient<IRule<DmarcRecord>, SubDomainPolicyShouldBeQuarantineOrReject>()
                 .AddTransient<IAmazonSimpleNotificationService, AmazonSimpleNotificationServiceClient>()
                 .AddTransient<IDmarcEvaluatorConfig, DmarcEvaluatorConfig>()
                 .AddSingleton<IAmazonSimpleSystemsManagement, CachingAmazonSimpleSystemsManagementClient>()
                 .AddTransient<IClock, Clock>()
-                .AddSpfApiKeyClient()
-                .AddDkimApiKeyClient()
-                .AddAggregateReportApiKeyClient()
                 .AddSerilogLogging()
                 .AddConditionally(
                     "MigrationAdvisories",

@@ -94,7 +94,7 @@ namespace MailCheck.Dmarc.Entity.Test.Entity
 
             DmarcRecords dmarcRecords = CreateDmarcRecords();
 
-            dmarcRecords.Records[0].Messages.Add(new Message(Guid.NewGuid(), MessageSources.DmarcEvaluator, MessageType.error, "EvaluationError", string.Empty));
+            dmarcRecords.Records[0].Messages.Add(new Message(Guid.NewGuid(), "mailcheck.dmarc.testName", MessageSources.DmarcEvaluator, MessageType.error, "EvaluationError", string.Empty));
             dmarcRecords.Records[0].Tags[0].Explanation = "Explanation";
 
             DmarcRecordsEvaluated dmarcRecordsEvaluated = new DmarcRecordsEvaluated(Id, dmarcRecords, null, null, DateTime.MinValue);

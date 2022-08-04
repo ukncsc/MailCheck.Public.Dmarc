@@ -23,7 +23,7 @@ namespace MailCheck.Dmarc.Evaluator.Rules
                 string errorMessage = string.Format(DmarcRulesResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage, subDomainPolicy?.PolicyType);
                 string markDown = DmarcRulesMarkDownResource.SubdomainPolicyMustBeQuarantineOrRejectErrorMessage;
 
-                messages.Add(new Message(Id, MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markDown));
+                messages.Add(new Message(Id, "mailcheck.dmarc.subdomainPolicyMustBeQuarantineOrReject", MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markDown));
             }
 
             return Task.FromResult(messages);

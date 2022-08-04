@@ -25,7 +25,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
                 string errorMessage = string.Format(DmarcParserResource.InvalidValueErrorMessage, "uri", value);
                 string markdown = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, "uri", value);
 
-                dmarcUri.AddError(new Error(Id, ErrorType.Error, errorMessage, markdown));
+                dmarcUri.AddError(new Error(Id, "mailcheck.dmarc.invalidUriValue", ErrorType.Error, errorMessage, markdown));
             }
 
             return dmarcUri;

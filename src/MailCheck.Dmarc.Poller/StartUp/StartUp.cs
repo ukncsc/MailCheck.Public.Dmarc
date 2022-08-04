@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using MailCheck.Common.Util;
 
 namespace MailCheck.Dmarc.Poller.StartUp
 {
@@ -46,6 +47,7 @@ namespace MailCheck.Dmarc.Poller.StartUp
             services
                 .AddTransient<DmarcProcessor>()
                 .AddSingleton(CreateLookupClient)
+                .AddTransient<IAuditTrailParser, AuditTrailParser>()
                 .AddTransient<IDmarcProcessor, DmarcProcessor>()
                 .AddTransient<IAmazonSimpleNotificationService, AmazonSimpleNotificationServiceClient>()
                 .AddTransient<IDnsClient, Dns.DnsClient>()
@@ -101,7 +103,7 @@ namespace MailCheck.Dmarc.Poller.StartUp
 
         private static ILookupClient CreateLookupClient(IServiceProvider provider)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            LookupClient lookupClient = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? new LookupClient(NameServer.GooglePublicDns, NameServer.GooglePublicDnsIPv6)
                 {
                     Timeout = provider.GetRequiredService<IDmarcPollerConfig>().DnsRecordLookupTimeout
@@ -111,11 +113,15 @@ namespace MailCheck.Dmarc.Poller.StartUp
                     .Select(_ => new IPEndPoint(_, 53)).ToArray())
                 {
                     ContinueOnEmptyResponse = false,
+                    ContinueOnDnsError = false,
                     UseCache = false,
                     UseTcpOnly = true,
+                    Retries = 0,
                     EnableAuditTrail = true,
                     Timeout = provider.GetRequiredService<IDmarcPollerConfig>().DnsRecordLookupTimeout
                 });
+
+            return new AuditTrailLoggingLookupClientWrapper(lookupClient, provider.GetService<IAuditTrailParser>(), provider.GetService<ILogger<AuditTrailLoggingLookupClientWrapper>>());
         }
     }
 }

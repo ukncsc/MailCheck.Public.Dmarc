@@ -51,7 +51,7 @@ namespace MailCheck.Dmarc.Poller
                 _log.LogError($"{message} {Environment.NewLine} Audit Trail: {dmarcDnsRecords.AuditTrail}");
 
                 return new DmarcPollResult(domain,
-                    new Error(Id, ErrorType.Error, message, string.Empty));
+                    new Error(Id, "mailcheck.dmarc.failedDmarcRecordQuery", ErrorType.Error, message, string.Empty));
             }
 
             if (dmarcDnsRecords.Value.Count == 0 ||

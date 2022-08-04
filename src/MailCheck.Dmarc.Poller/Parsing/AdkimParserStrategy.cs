@@ -22,7 +22,7 @@ namespace MailCheck.Dmarc.Poller.Parsing
             {
                 string errorMessage = string.Format(DmarcParserResource.InvalidValueErrorMessage, Tag, value);
                 string markDown = string.Format(DmarcParserMarkdownResource.InvalidValueErrorMessage, Tag, value);
-                adkim.AddError(new Error(Id, ErrorType.Error, errorMessage, markDown));
+                adkim.AddError(new Error(Id, "mailcheck.dmarc.invalidAdkimValue", ErrorType.Error, errorMessage, markDown));
             }
 
             return adkim;

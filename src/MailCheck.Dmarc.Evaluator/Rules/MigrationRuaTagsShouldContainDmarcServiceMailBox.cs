@@ -87,11 +87,16 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
                 string markdown = string.Format(template, mailcheckSuggestedRecord, myncscSuggestedRecord, record.Domain);
 
-                return new Message(Guid.Parse("030F78E8-EAA9-48EE-9458-93080AAB57B0"), MessageSources.DmarcEvaluator, MessageType.error, string.Format(
+                return new Message(Guid.Parse("030F78E8-EAA9-48EE-9458-93080AAB57B0"),
+                    "mailcheck.dmarc.ruaTagShouldNotHaveMisconfiguredMailCheckMailbox",
+                    MessageSources.DmarcEvaluator,
+                    MessageType.error,
+                    string.Format(
                         DmarcRulesResource.RuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage,
                         _dmarcVerificationMailboxAddress,
-                        _dmarcVerificationMailbox.OriginalString), markdown
-                    );
+                        _dmarcVerificationMailbox.OriginalString),
+                    markdown
+                );
             }
 
             if (!mailCheckUris.Any() && otherAllowedRuaCount == 0)
@@ -115,17 +120,29 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
                 dmarcRecord = dmarcRecord.TrimEnd();
 
-                return new Message(Guid.Parse("6F1C3B66-CFB4-4CEB-BF6B-DC81637FC2B0"), MessageSources.DmarcEvaluator, MessageType.warning, string.Format(DmarcRulesResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage,
+                return new Message(Guid.Parse("6F1C3B66-CFB4-4CEB-BF6B-DC81637FC2B0"),
+                    "mailcheck.dmarc.ruaTagsShouldContainDmarcServiceMailBox",
+                    MessageSources.DmarcEvaluator,
+                    MessageType.info,
+                    string.Format(DmarcRulesResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage,
                         _dmarcVerificationMailboxAddress,
                         _dmarcVerificationMailbox.OriginalString),
-                    string.Format(DmarcRulesMarkDownResource.MigrationRuaTagsShouldContainDmarcServiceMailBoxErrorMessage, mailcheckDmarcRecord, myncscDmarcRecord, record.Domain));
-
+                    string.Format(DmarcRulesMarkDownResource.MigrationRuaTagsShouldContainDmarcServiceMailBoxErrorMessage,
+                        mailcheckDmarcRecord,
+                        myncscDmarcRecord,
+                        record.Domain)
+                );
             }
 
             if (reportUris.GroupBy(_ => _.OriginalString).Any(_ => _.Count() > 1))
             {
-                return new Message(Guid.Parse("EBB3FE7C-E80A-48C0-B0F1-79C8E88F0F12"), MessageSources.DmarcEvaluator, MessageType.warning,
-                    DmarcRulesResource.RuaTagShouldNotContainDuplicateUrisErrorMessage, DmarcRulesMarkDownResource.RuaTagShouldNotContainDuplicateUrisErrorMessage);
+                return new Message(Guid.Parse("EBB3FE7C-E80A-48C0-B0F1-79C8E88F0F12"),
+                    "mailcheck.dmarc.ruaTagShouldNotContainDuplicateUris",
+                    MessageSources.DmarcEvaluator,
+                    MessageType.warning,
+                    DmarcRulesResource.RuaTagShouldNotContainDuplicateUrisErrorMessage,
+                    DmarcRulesMarkDownResource.RuaTagShouldNotContainDuplicateUrisErrorMessage
+                );
             }
 
             return null;

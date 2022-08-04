@@ -59,12 +59,6 @@ namespace MailCheck.Dmarc.Evaluator.Rules {
             }
         }
         
-        internal static string NudgeAlongFromPolicyOfNoneMessage {
-            get {
-                return ResourceManager.GetString("NudgeAlongFromPolicyOfNoneMessage", resourceCulture);
-            }
-        }
-        
         internal static string PctValueShouldBe100ErrorMessage {
             get {
                 return ResourceManager.GetString("PctValueShouldBe100ErrorMessage", resourceCulture);
@@ -116,12 +110,6 @@ namespace MailCheck.Dmarc.Evaluator.Rules {
         internal static string RufTagShouldNotContainDmarcServiceMailBoxErrorMessage {
             get {
                 return ResourceManager.GetString("RufTagShouldNotContainDmarcServiceMailBoxErrorMessage", resourceCulture);
-            }
-        }
-        
-        internal static string ShouldHaveSpfRecordWIthPolicyOfQuarantineOrReject {
-            get {
-                return ResourceManager.GetString("ShouldHaveSpfRecordWIthPolicyOfQuarantineOrReject", resourceCulture);
             }
         }
         

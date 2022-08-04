@@ -85,7 +85,7 @@ namespace MailCheck.Dmarc.Poller.Test.Parsers
         public void EmptyStringProvidedUriReturnedWithError()
         {
             DmarcUri dmarcUri = new DmarcUri(null);
-            dmarcUri.AddError(new Error(Guid.NewGuid(), ErrorType.Error, string.Empty, string.Empty));
+            dmarcUri.AddError(new Error(Guid.NewGuid(), "mailcheck.dmarc.testName", ErrorType.Error, string.Empty, string.Empty));
             A.CallTo(() => _dmarcUriParser.Parse(null)).Returns(dmarcUri);
 
             UriTag uriTag = _parser.Parse(string.Empty);
@@ -101,7 +101,7 @@ namespace MailCheck.Dmarc.Poller.Test.Parsers
         public void NullStringProvidedUriReturnedWithError()
         {
             DmarcUri dmarcUri = new DmarcUri(null);
-            dmarcUri.AddError(new Error(Guid.NewGuid(), ErrorType.Error, string.Empty, string.Empty));
+            dmarcUri.AddError(new Error(Guid.NewGuid(), "mailcheck.dmarc.testName", ErrorType.Error, string.Empty, string.Empty));
             A.CallTo(() => _dmarcUriParser.Parse(null)).Returns(dmarcUri);
 
             UriTag uriTag = _parser.Parse(null);

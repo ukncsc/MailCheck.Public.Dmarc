@@ -84,10 +84,15 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
                 string markdown = string.Format(template, suggestedRecord, record.Domain);
 
-                return new Message(Guid.Parse("85DB50C5-E3DA-479A-A9CE-1B07C81C3747"), MessageSources.DmarcEvaluator, MessageType.error, string.Format(
+                return new Message(Guid.Parse("85DB50C5-E3DA-479A-A9CE-1B07C81C3747"),
+                    "mailcheck.dmarc.ruaTagShouldNotHaveMisconfiguredMailCheckMailbox",
+                    MessageSources.DmarcEvaluator,
+                    MessageType.error,
+                    string.Format(
                         DmarcRulesResource.RuaTagShouldNotHaveMisconfiguredMailCheckMailboxErrorMessage,
                         _dmarcVerificationMailboxAddress,
-                        _dmarcVerificationMailbox.OriginalString), markdown
+                        _dmarcVerificationMailbox.OriginalString),
+                    markdown
                     );
             }
 
@@ -108,17 +113,27 @@ namespace MailCheck.Dmarc.Evaluator.Rules
 
                 dmarcRecord = dmarcRecord.TrimEnd();
 
-                return new Message(Guid.Parse("045C9D62-8771-4D8F-B981-EAC70C7B74A2"), MessageSources.DmarcEvaluator, MessageType.warning, string.Format(DmarcRulesResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage,
+                return new Message(Guid.Parse("045C9D62-8771-4D8F-B981-EAC70C7B74A2"),
+                    "mailcheck.dmarc.ruaTagsShouldContainDmarcServiceMailBox",
+                    MessageSources.DmarcEvaluator,
+                    MessageType.info,
+                    string.Format(DmarcRulesResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage,
                         _dmarcVerificationMailboxAddress,
                         _dmarcVerificationMailbox.OriginalString),
-                    string.Format(DmarcRulesMarkDownResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage, dmarcRecord, record.Domain));
+                    string.Format(DmarcRulesMarkDownResource.RuaTagsShouldContainDmarcServiceMailBoxErrorMessage, dmarcRecord, record.Domain)
+                );
 
             }
 
             if (reportUris.GroupBy(_ => _.OriginalString).Any(_ => _.Count() > 1))
             {
-                return new Message(Guid.Parse("354DDFCE-B9DE-4C3B-93BD-A120408ED94A"), MessageSources.DmarcEvaluator, MessageType.warning,
-                    DmarcRulesResource.RuaTagShouldNotContainDuplicateUrisErrorMessage, DmarcRulesMarkDownResource.RuaTagShouldNotContainDuplicateUrisErrorMessage);
+                return new Message(Guid.Parse("354DDFCE-B9DE-4C3B-93BD-A120408ED94A"),
+                    "mailcheck.dmarc.ruaTagShouldNotContainDuplicateUris",
+                    MessageSources.DmarcEvaluator,
+                    MessageType.warning,
+                    DmarcRulesResource.RuaTagShouldNotContainDuplicateUrisErrorMessage,
+                    DmarcRulesMarkDownResource.RuaTagShouldNotContainDuplicateUrisErrorMessage
+                );
             }
 
             return null;

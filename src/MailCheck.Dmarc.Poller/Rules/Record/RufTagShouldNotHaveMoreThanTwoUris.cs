@@ -11,5 +11,6 @@ namespace MailCheck.Dmarc.Poller.Rules.Record
         }
 
         public override Guid Id => Guid.Parse("31981DD9-5C94-4F4B-985D-1E5EABD4AA3A");
+        public override string Name => "mailcheck.dmarc.rufTagShouldNotHaveMoreThanTwoUris";
     }
 }

@@ -123,9 +123,6 @@
     <data name="InvestigateRejectedEmailsOnDomainsWithRejectPolicy" xml:space="preserve">
     <value>This should be investigated to identify if it's the result of spoofed email, or a change to legitimate email use that requires SPF/DKIM configuration e.g. using a new provider.</value>
   </data>
-    <data name="NudgeAlongFromPolicyOfNoneMessage" xml:space="preserve">
-    <value>It's been over a month since your last change affecting DMARC. You should have enough information from aggregate reporting to either improve your SPF/DKIM configuration or proceed to p=quarantine</value>
-  </data>
     <data name="PctValueShouldBe100ErrorMessage" xml:space="preserve">
     <value>Only a percent value (pct) of 100 will apply DMARC policy to all messages. Consider changing percent value from {0} to 100.</value>
   </data>
@@ -133,7 +130,7 @@
     <value>On {0} {1}% of email was rejected.</value>
   </data>
     <data name="PolicyShouldBeQuarantineOrRejectErrorMessage" xml:space="preserve">
-    <value>Only a policy (p) of Quarantine or Reject will protect recipients from spoofed email. Before changing policy, you will need to ensure SPF and/or DKIM are correctly configured for each legitimate email sending system.</value>
+    <value>Weak DMARC policy (p=none). Domain can be used to send malicious spoofed emails. Configure SPF and/or DKIM on legitimate email systems, and then progress to a DMARC policy (p) of quarantine or reject.</value>
   </data>
     <data name="RuaMailbox" xml:space="preserve">
     <value>mailto:dmarc-rua@dmarc.service.gov.uk</value>
@@ -148,15 +145,12 @@
     <value>The aggregate report URI tag (rua) is misconfigured.</value>
   </data>
     <data name="RuaTagsShouldContainDmarcServiceMailBoxErrorMessage" xml:space="preserve">
-    <value>Mail Check can only provide email reporting if the aggregate report URI tag (rua) includes a valid Mail Check rua address. Consider adding a valid Mail Check rua address to the rua tag values.</value>
+    <value>Mail Check DMARC reporting not set up. This will help you identify systems and sub-domains, and fix issues with SPF, DKIM and DMARC.</value>
   </data>
     <data name="RufTagShouldNotContainDmarcServiceMailBoxErrorMessage" xml:space="preserve">
     <value>We no longer collect forensic reports, consider removing our address from the ruf field.</value>
   </data>
-    <data name="ShouldHaveSpfRecordWIthPolicyOfQuarantineOrReject" xml:space="preserve">
-    <value>This domain is covered by a policy or subdomain policy of quarantine or reject, but it has no SPF record. This may cause emails to be dropped unless they are signed using DKIM. If this is intended you should consider putting in a reject all SPF record</value>
-  </data>
     <data name="SubdomainPolicyMustBeQuarantineOrRejectErrorMessage" xml:space="preserve">
-    <value>Only a subdomain policy (sp) of Quarantine or Reject will protect recipients from spoofed email. Consider changing subdomain policy from {0} to Quarantine or Reject.</value>
+    <value>Weak sub-domain DMARC policy (sp=none). Your sub-domains (fake or real) can be used to send malicious spoofed emails.</value>
   </data>
 </root>

@@ -22,7 +22,7 @@ namespace MailCheck.Dmarc.Evaluator.Rules
             {
                 string errorMessage = string.Format(DmarcRulesResource.PctValueShouldBe100ErrorMessage, percent.PercentValue);
                 string markDown = DmarcRulesMarkDownResource.PctValueShouldBe100ErrorMessage;
-                messages.Add(new Message(Id, MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markDown));
+                messages.Add(new Message(Id, "mailcheck.dmarc.pctValueShouldBe100", MessageSources.DmarcEvaluator, MessageType.warning, errorMessage, markDown));
             }
 
             return Task.FromResult(messages);
