@@ -43,7 +43,9 @@ namespace MailCheck.Dmarc.EntityHistory
 
                 foreach (string email in emails)
                 {
-                    string token = email.TrimEnd(',').TrimEnd(';');
+                    if (string.IsNullOrWhiteSpace(email)) continue;
+                    
+                    string token = email.TrimStart().TrimEnd(',', ';', ' ', '\t');
                     
                     if (token.ToLower().EndsWith(VALID_RUA_EMAIL))
                     {
